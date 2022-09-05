@@ -1,12 +1,8 @@
 import NextAuth from "next-auth";
+import { User } from "../ts/interfaces";
 
 declare module "next-auth" {
-    interface Session {
-        user: {
-            name: string;
-            email: string;
-            isAdmin: boolean;
-            image: string;
-        };
+    interface Session extends User {
+        user: User;
     }
 }

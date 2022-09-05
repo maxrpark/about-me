@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { signOut } from "next-auth/react";
 export default NextAuth({
     providers: [
         GithubProvider({
@@ -12,8 +11,10 @@ export default NextAuth({
     callbacks: {
         async session({ session }) {
             if (session?.user?.email) {
-                const administrators = ["proyectoindit@gmail.com"];
-                session.isAdmin = administrators.includes(session?.user?.email);
+                const administrators = [process.env.ADMINISTRATOR];
+                session.user.isAdmin = administrators.includes(
+                    session?.user?.email
+                );
             }
 
             return session;
