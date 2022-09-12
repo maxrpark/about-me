@@ -8,6 +8,8 @@ interface Props {
 }
 
 const AdminPage: NextPage<Props> = ({ user }) => {
+    console.log(user);
+
     return (
         <div>
             Hello
