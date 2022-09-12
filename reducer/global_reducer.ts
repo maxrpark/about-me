@@ -9,16 +9,78 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
                 ...state,
                 profileData: action.payload,
             };
+        case ActionType.TOGGLE_MODAL:
+            return {
+                ...state,
+                showModal: !state.showModal,
+                selectedLink: {
+                    id: "",
+                    name: "",
+                    url: "",
+                },
+            };
+
+        case ActionType.HANDLE_FORM_INPUT:
+            const { name, value, type } = action.payload;
+            //@ts-ignore
+            let typeTempState = { ...state[type] };
+            let updatedValues = {
+                ...typeTempState,
+                [name]: value,
+            };
+
+            return {
+                ...state,
+                [type]: updatedValues,
+            };
+
+        case ActionType.ADD_ITEM:
+            const newLink = {
+                ...state.selectedLink,
+                id: action.payload,
+            };
+
+            return {
+                ...state,
+                profileData: {
+                    ...state.profileData,
+                    links: [...state.profileData.links, newLink],
+                },
+                isEditing: false,
+            };
+        case ActionType.EDITING_ITEM:
+            let tempList = state.profileData.links.map((item: any) => {
+                if (item.id === state.selectedLink.id) {
+                    return state.selectedLink;
+                }
+                return item;
+            });
+            let editedProfileData = { ...state.profileData, links: tempList };
+            return {
+                ...state,
+                profileData: editedProfileData,
+                isEditing: false,
+            };
         case ActionType.DELETE_ITEM:
             const { profileData } = state;
 
-            profileData.links = profileData.links.filter(
+            profileData.links = state.profileData.links.filter(
                 (item: any) => item.id !== action.payload
             );
 
             return {
                 ...state,
-                ...profileData,
+                profileData,
+            };
+        case ActionType.SELECT_ITEM:
+            let selected = state.profileData.links.find(
+                (item: any) => item.id === action.payload
+            );
+
+            return {
+                ...state,
+                isEditing: true,
+                selectedLink: selected,
             };
 
         default:

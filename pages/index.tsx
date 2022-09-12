@@ -44,11 +44,11 @@ const Home: NextPage<Props> = ({ data }) => {
                 })}
             </div>
             <div className='social-icons'>
-                {social.map((link: any) => {
+                {social.map((link: any, idx) => {
                     return (
-                        <>
+                        <div key={idx}>
                             <TwitterFill />
-                        </>
+                        </div>
                     );
                 })}
             </div>

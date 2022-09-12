@@ -5,22 +5,32 @@ import { useGlobalContext } from "../context/globalContext";
 import fsPromises from "fs/promises";
 import path from "path";
 import styled from "styled-components";
-import { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { ChangeEvent, useEffect } from "react";
+
+import { FormRow } from "../components/";
 
 interface Props {
     data: any;
 }
 
 const ChangePage: NextPage<Props> = ({ data }) => {
-    const { name, setData, deleteLink, profileData, saveChanges } =
-        useGlobalContext();
+    const {
+        isEditing,
+        profileData,
+        selectedLink,
+        showModal,
+        setData,
+        deleteItem,
+        selectItem,
+        saveChanges,
+        handleInputChange,
+        handleFormSubmit,
+        addNewItem,
+    } = useGlobalContext();
     const { links } = data;
 
     useEffect(() => {
         setData(data);
-        // const id = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-        // console.log(id);
     }, []);
     if (!profileData) {
         return <h2>Loading</h2>;
@@ -32,16 +42,50 @@ const ChangePage: NextPage<Props> = ({ data }) => {
                     return (
                         <div className='btn' key={link.id}>
                             {link.name}
-                            <span onClick={() => deleteLink(link.id)}>
+                            <span onClick={() => deleteItem(link.id)}>
                                 Deleted
+                            </span>
+                            <span onClick={() => selectItem(link.id)}>
+                                Edit
                             </span>
                         </div>
                     );
                 })}
             </div>
+            {showModal && (
+                <div className='modal'>
+                    <form>
+                        <FormRow
+                            name='name'
+                            type='text'
+                            formName='selectedLink'
+                            value={selectedLink.name}
+                            handleChange={handleInputChange}
+                        />
+                        <FormRow
+                            name='url'
+                            type='text'
+                            formName='selectedLink'
+                            value={selectedLink.url}
+                            handleChange={handleInputChange}
+                        />
+
+                        <button
+                            type='submit'
+                            className='btn'
+                            onClick={handleFormSubmit}
+                        >
+                            Confirm
+                        </button>
+                    </form>
+                </div>
+            )}
 
             <div className='btn' onClick={() => saveChanges()}>
                 Save
+            </div>
+            <div className='btn' onClick={addNewItem}>
+                Add Link
             </div>
         </Wrapper>
     );
