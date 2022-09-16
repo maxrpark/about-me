@@ -1,6 +1,7 @@
 import { Action } from "../ts/contexts/actions/global_actions";
 import { ActionType } from "../ts/contexts/actions-types";
 import { InitialState } from "../ts/contexts/initialStates";
+import { LinkItemInt } from "../ts/interfaces";
 
 const global_reducer = (state: InitialState, action: Action): InitialState => {
     switch (action.type) {
@@ -18,6 +19,17 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
                     name: "",
                     url: "",
                 },
+            };
+
+        case ActionType.SELECT_ITEM:
+            let selected = state.profileData.links.find(
+                (item: LinkItemInt) => item.id === action.payload
+            );
+
+            return {
+                ...state,
+                isEditing: true,
+                selectedLink: selected,
             };
 
         case ActionType.HANDLE_FORM_INPUT:
@@ -49,7 +61,7 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
                 isEditing: false,
             };
         case ActionType.EDITING_ITEM:
-            let tempList = state.profileData.links.map((item: any) => {
+            let tempList = state.profileData.links.map((item: LinkItemInt) => {
                 if (item.id === state.selectedLink.id) {
                     return state.selectedLink;
                 }
@@ -65,22 +77,12 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
             const { profileData } = state;
 
             profileData.links = state.profileData.links.filter(
-                (item: any) => item.id !== action.payload
+                (item: LinkItemInt) => item.id !== action.payload
             );
 
             return {
                 ...state,
                 profileData,
-            };
-        case ActionType.SELECT_ITEM:
-            let selected = state.profileData.links.find(
-                (item: any) => item.id === action.payload
-            );
-
-            return {
-                ...state,
-                isEditing: true,
-                selectedLink: selected,
             };
 
         default:

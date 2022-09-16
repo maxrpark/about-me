@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { getSession, signOut } from "next-auth/react";
 import { GetServerSideProps } from "next";
-import { User } from "../ts/interfaces";
+import { User } from "../ts/interfaces/interfaces";
 
 interface Props {
     user: User;

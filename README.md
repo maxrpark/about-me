@@ -2,7 +2,7 @@
 
 ## Started
 
--   [ ] Styles
+-   [x] Styles
 -   [ ] Add types
 
 Boilerplate for developers to create a profile similar to Linktree.
@@ -32,4 +32,7 @@ Admin can change the data from the frontend. Local DB from.
         -   [ ] Basic
         -   [ ] Minimalist
         -   [ ] ANOTHER ONE
--   [ ] Add types
+-   [ ] Create theme or style context
+-   [ ] Create Global Context
+    -   [ ] links
+    -   [ ] social

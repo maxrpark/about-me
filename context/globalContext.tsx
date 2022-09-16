@@ -3,8 +3,10 @@ import global_reducer from "../reducer/global_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
 import { InitialState } from "../ts/contexts/initialStates";
 import { v4 as uuidv4 } from "uuid";
+import { LinkItemInt, ProfileDataInt } from "../ts/interfaces";
 
 import axios from "axios";
+import { useEffect } from "react";
 
 type Props = {
     children: React.ReactNode;
@@ -18,10 +20,11 @@ export interface HandleFormInt {
 
 interface GlobalContext {
     name: string;
-    profileData: any;
+    profileData: ProfileDataInt;
     isEditing: boolean;
     showModal: boolean;
-    selectedLink: any;
+    selectedLink: LinkItemInt;
+
     setData: (data: any) => void;
     saveChanges: () => void;
     addNewItem: () => void;
@@ -71,12 +74,13 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     };
 
     const addNewItem = () => {
+        // Change Name
         dispatch({
             type: ActionType.TOGGLE_MODAL,
         });
     };
 
-    // FORMSUBMIT
+    // FORM SUBMIT
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (state.selectedLink.name && state.selectedLink.name.trim() !== "") {
@@ -125,6 +129,10 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         );
         console.log(res);
     };
+
+    useEffect(() => {
+        saveChanges();
+    }, [state.profileData]);
 
     return (
         <GlobalContext.Provider

@@ -1,3 +1,4 @@
+import { LinkItemInt, ProfileDataInt } from "../../interfaces";
 import { ActionType } from "../actions-types";
 
 export interface HandleFormInt {
@@ -8,7 +9,7 @@ export interface HandleFormInt {
 
 interface SET_DATA {
     type: ActionType.SET_DATA;
-    payload: any;
+    payload: ProfileDataInt;
 }
 interface DELETE_ITEM {
     type: ActionType.DELETE_ITEM;
@@ -25,12 +26,12 @@ interface HANDLE_FORM_INPUT {
 }
 interface EDITING_ITEM {
     type: ActionType.EDITING_ITEM;
-    payload: any;
+    payload: LinkItemInt;
 }
 
 interface ADD_ITEM {
     type: ActionType.ADD_ITEM;
-    payload: any;
+    payload: string;
 }
 interface TOGGLE_MODAL {
     type: ActionType.TOGGLE_MODAL;
