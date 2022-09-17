@@ -31,5 +31,3 @@ export const AvailableIcons = [
     name: Icon.GITHUB,
   },
 ];
-
-// export type IconType = Icons

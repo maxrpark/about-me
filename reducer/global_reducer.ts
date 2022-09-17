@@ -28,15 +28,14 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
       };
 
     case ActionType.SELECT_ITEM:
-      let selected = state.profileData[action.payload.linkType].find(
-        (item: LinkItemInt) => item.id === action.payload.id
+      let selected = state.profileData[state.linkType].find(
+        (item: LinkItemInt) => item.id === action.payload
       );
 
       return {
         ...state,
         isEditing: true,
         selectedLink: selected,
-        linkType: action.payload.linkType,
       };
 
     case ActionType.HANDLE_FORM_INPUT:
@@ -69,7 +68,7 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
         },
         isEditing: false,
       };
-    case ActionType.EDITING_ITEM:
+    case ActionType.EDIT_ITEM:
       let tempList = state.profileData[state.linkType].map(
         (item: LinkItemInt) => {
           if (item.id === state.selectedLink.id) {
@@ -91,9 +90,9 @@ const global_reducer = (state: InitialState, action: Action): InitialState => {
     case ActionType.DELETE_ITEM:
       const { profileData } = state;
 
-      profileData[action.payload.linkType] = state.profileData[
-        action.payload.linkType
-      ].filter((item: LinkItemInt) => item.id !== action.payload.id);
+      profileData[state.linkType] = state.profileData[state.linkType].filter(
+        (item: LinkItemInt) => item.id !== action.payload
+      );
 
       return {
         ...state,

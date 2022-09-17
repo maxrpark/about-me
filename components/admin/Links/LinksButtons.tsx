@@ -1,10 +1,10 @@
 import { useGlobalContext } from "../../../context/globalContext";
-
+import { LinkItemInt } from "../../../ts/interfaces";
 const LinkButtons: React.FC = ({}) => {
-  const { profileData, selectItem, addNewItem } = useGlobalContext();
+  const { profileData, selectItem, selectOrCreateItem } = useGlobalContext();
   return (
     <div className='btns-container'>
-      {profileData.links.map((link: any) => {
+      {profileData.links.map((link: LinkItemInt) => {
         return (
           <div className='btn' key={link.id}>
             {link.name}
@@ -13,7 +13,7 @@ const LinkButtons: React.FC = ({}) => {
           </div>
         );
       })}
-      <div className='btn' onClick={() => addNewItem("links")}>
+      <div className='btn' onClick={() => selectOrCreateItem("links")}>
         Add now button
       </div>
     </div>

@@ -18,19 +18,19 @@ interface SET_DATA {
 }
 interface DELETE_ITEM {
   type: ActionType.DELETE_ITEM;
-  payload: selectedPayload;
+  payload: string;
 }
 interface SELECT_ITEM {
   type: ActionType.SELECT_ITEM;
-  payload: selectedPayload;
+  payload: string;
 }
 
 interface HANDLE_FORM_INPUT {
   type: ActionType.HANDLE_FORM_INPUT;
   payload: HandleFormInt;
 }
-interface EDITING_ITEM {
-  type: ActionType.EDITING_ITEM;
+interface EDIT_ITEM {
+  type: ActionType.EDIT_ITEM;
   payload: LinkItemInt;
 }
 
@@ -51,7 +51,7 @@ export type Action =
   | DELETE_ITEM
   | HANDLE_FORM_INPUT
   | SELECT_ITEM
-  | EDITING_ITEM
+  | EDIT_ITEM
   | TOGGLE_MODAL
   | SELECTED_LINK_TYPE
   | ADD_ITEM;

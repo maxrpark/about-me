@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { getSession, signOut } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { User } from "../ts/interfaces/interfaces";
+import Link from "next/link";
 
 interface Props {
   user: User;
@@ -14,7 +15,11 @@ const AdminPage: NextPage<Props> = ({ user }) => {
       <h2>{user.email}</h2>
       <h2>{user.name}</h2>
       Signed in as {user.email} <br />
+      <button>
+        <Link href='/change'>Edit Links</Link>
+      </button>
       <button onClick={() => signOut()}>Sign out</button>
+      <button>Change theme</button>
     </div>
   );
 };

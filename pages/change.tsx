@@ -1,5 +1,6 @@
+import { GetServerSideProps } from "next";
+import type { NextPage } from "next";
 import { useEffect } from "react";
-import type { NextPage, GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import fsPromises from "fs/promises";
 import path from "path";
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const ChangePage: NextPage<Props> = ({ data }) => {
-  const { profileData, showModal, setData, selectItem, addNewItem } =
+  const { profileData, showModal, setData, selectItem, selectOrCreateItem } =
     useGlobalContext();
 
   useEffect(() => {

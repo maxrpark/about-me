@@ -4,16 +4,11 @@ import fsPromises from "fs/promises";
 import path from "path";
 import styled from "styled-components";
 import Image from "next/image";
-import { icons, IconType } from "../components/icons";
-
-import { ProfileDataInt } from "../ts/interfaces";
+import { MyLinksButtons, MySocialLinks } from "../components";
+import { ProfileDataInt, LinkItemInt } from "../ts/interfaces";
 
 interface Props {
   data: ProfileDataInt;
-}
-interface ButtonsLink {
-  name: string;
-  url: string;
 }
 
 const Home: NextPage<Props> = ({ data }) => {
@@ -29,32 +24,8 @@ const Home: NextPage<Props> = ({ data }) => {
           alt={"user-img"}
         />
       </figure>
-      <div className='btns-container'>
-        {links.map((link: ButtonsLink, idx: number) => {
-          return (
-            <a
-              className='btn'
-              target={"_blank"}
-              key={idx}
-              href={link.url}
-              rel='noreferrer'
-            >
-              {link.name}
-            </a>
-          );
-        })}
-      </div>
-      <div className='social-icons'>
-        {social.map((link: ButtonsLink, idx) => {
-          const { name } = link;
-          const SocialIcon = icons[name as IconType];
-          return (
-            <div key={idx}>
-              <SocialIcon />
-            </div>
-          );
-        })}
-      </div>
+      <MyLinksButtons data={links} />
+      <MySocialLinks data={social} />
     </Wrapper>
   );
 };
@@ -62,7 +33,7 @@ const Home: NextPage<Props> = ({ data }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const filePath = path.join(process.cwd(), "db/db_about_me.json");
   const jsonData = await fsPromises.readFile(filePath);
-  const objectData: ProfileDataInt = JSON.parse(jsonData.toString());
+  const objectData: LinkItemInt = JSON.parse(jsonData.toString());
   return {
     props: {
       data: objectData,

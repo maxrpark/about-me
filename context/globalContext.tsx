@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 import global_reducer from "../reducer/global_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
 import { InitialState } from "../ts/contexts/initialStates";
@@ -7,7 +7,6 @@ import { LinkItemInt, ProfileDataInt } from "../ts/interfaces";
 import { AvailableIcons } from "../components/icons";
 
 import axios from "axios";
-import { useEffect } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -29,7 +28,7 @@ interface GlobalContext {
   availableIcons: any;
   setData: (data: any) => void;
   saveChanges: () => void;
-  addNewItem: (linkType: string) => void;
+  selectOrCreateItem: (linkType: string) => void;
   deleteItem: (id: string, linkType: string) => void;
   selectItem: (id: string, linkType: string) => void;
   handleInputChange: (
@@ -85,7 +84,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
-  const addNewItem = (linkType: string) => {
+  const selectOrCreateItem = (linkType: string) => {
     // Change Name
     dispatch({
       type: ActionType.TOGGLE_MODAL,
@@ -102,7 +101,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     if (state.selectedLink.name && state.selectedLink.name.trim() !== "") {
       if (state.isEditing) {
         dispatch({
-          type: ActionType.EDITING_ITEM,
+          type: ActionType.EDIT_ITEM,
           payload: state.selectedLink,
         });
       } else {
@@ -123,10 +122,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   const deleteItem = (id: string, linkType: string) => {
     dispatch({
       type: ActionType.DELETE_ITEM,
-      payload: {
-        id,
-        linkType,
-      },
+      payload: id,
     });
   };
 
@@ -136,11 +132,13 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     });
 
     dispatch({
+      type: ActionType.SELECTED_LINK_TYPE,
+      payload: linkType,
+    });
+
+    dispatch({
       type: ActionType.SELECT_ITEM,
-      payload: {
-        id,
-        linkType,
-      },
+      payload: id,
     });
   };
 
@@ -164,7 +162,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         saveChanges,
         handleInputChange,
         handleFormSubmit,
-        addNewItem,
+        selectOrCreateItem,
       }}
     >
       {children}
