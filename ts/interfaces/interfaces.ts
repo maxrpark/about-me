@@ -12,4 +12,5 @@ export interface LinkItemInt {
 
 export interface ProfileDataInt {
     links: LinkItemInt[];
+    social: LinkItemInt[];
 }

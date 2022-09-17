@@ -12,6 +12,10 @@ Admin can change the data from the frontend. Local DB from.
 -   Build with Next.js
 -   Next Auth
 
+## Icons
+
+Icons are located in the component/icons folders. They are SVG icons coming from [remixicon.](https://remixicon.com/)
+
 ## Need to do
 
 -   [x] Next Auth
