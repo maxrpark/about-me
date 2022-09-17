@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { MyLinksButtons, MySocialLinks } from "../components";
 import { ProfileDataInt, LinkItemInt } from "../ts/interfaces";
+import Link from "next/link";
 
 interface Props {
   data: ProfileDataInt;
@@ -26,6 +27,8 @@ const Home: NextPage<Props> = ({ data }) => {
       </figure>
       <MyLinksButtons data={links} />
       <MySocialLinks data={social} />
+      <Link href={"/admin"}>admin</Link>
+      <Link href={"/login"}>login</Link>
     </Wrapper>
   );
 };

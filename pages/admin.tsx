@@ -3,6 +3,7 @@ import { getSession, signOut } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { User } from "../ts/interfaces/interfaces";
 import Link from "next/link";
+import UserLayout from "../components/layouts/UserLayout";
 
 interface Props {
   user: User;
@@ -10,17 +11,19 @@ interface Props {
 
 const AdminPage: NextPage<Props> = ({ user }) => {
   return (
-    <div>
-      Hello
-      <h2>{user.email}</h2>
-      <h2>{user.name}</h2>
-      Signed in as {user.email} <br />
-      <button>
-        <Link href='/change'>Edit Links</Link>
-      </button>
-      <button onClick={() => signOut()}>Sign out</button>
-      <button>Change theme</button>
-    </div>
+    <UserLayout>
+      <>
+        Hello
+        <h2>{user.email}</h2>
+        <h2>{user.name}</h2>
+        Signed in as {user.email} <br />
+        <button>
+          <Link href='/change'>Edit Links</Link>
+        </button>
+        <button onClick={() => signOut()}>Sign out</button>
+        <button>Change theme</button>
+      </>
+    </UserLayout>
   );
 };
 

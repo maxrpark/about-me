@@ -11,6 +11,7 @@ import { ProfileDataInt } from "../ts/interfaces";
 import styled from "styled-components";
 
 import { LinksModal, LinksButtons, LinksSocial } from "../components/";
+import UserLayout from "../components/layouts/UserLayout";
 
 interface Props {
   data: ProfileDataInt;
@@ -27,11 +28,13 @@ const ChangePage: NextPage<Props> = ({ data }) => {
     return <h2>Loading</h2>;
   }
   return (
-    <Wrapper>
-      <LinksButtons />
-      <LinksSocial />
-      {showModal && <LinksModal />}
-    </Wrapper>
+    <UserLayout>
+      <Wrapper>
+        <LinksButtons />
+        <LinksSocial />
+        {showModal && <LinksModal />}
+      </Wrapper>
+    </UserLayout>
   );
 };
 
