@@ -24,7 +24,7 @@ const ChangePage: NextPage<Props> = ({ data }) => {
     setData(data);
   }, []);
   if (!profileData.links) {
-    return <h2>Loading</h2>;
+    return <h2>Loading!</h2>;
   }
   return (
     <UserLayout>
