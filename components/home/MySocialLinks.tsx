@@ -11,9 +11,15 @@ const MySocialLinks: React.FC<Props> = ({ data }) => {
         const { name } = link;
         const SocialIcon = icons[name as IconType];
         return (
-          <div key={link.id}>
+          <a
+            className='btn'
+            target={"_blank"}
+            key={link.id}
+            href={link.url}
+            rel='noreferrer'
+          >
             <SocialIcon />
-          </div>
+          </a>
         );
       })}
     </div>
