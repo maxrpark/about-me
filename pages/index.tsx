@@ -4,7 +4,7 @@ import fsPromises from "fs/promises";
 import path from "path";
 import styled from "styled-components";
 import Image from "next/image";
-import { MyLinksButtons, MySocialLinks } from "../components";
+import { MyLinks } from "../components";
 import { ProfileDataInt, LinkItemInt } from "../ts/interfaces";
 import Link from "next/link";
 
@@ -25,8 +25,9 @@ const Home: NextPage<Props> = ({ data }) => {
           alt={"user-img"}
         />
       </figure>
-      <MyLinksButtons data={links} />
-      <MySocialLinks data={social} />
+      <MyLinks data={links} classType={"links"} />
+      <MyLinks data={social} classType={"social"} />
+
       <Link href={"/admin"}>admin</Link>
       <Link href={"/login"}>login</Link>
     </Wrapper>
@@ -45,9 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 const Wrapper = styled.section`
-  padding: 4em;
   background: papayawhip;
-  color: red;
 
   .user-image {
     width: 100px;
@@ -61,7 +60,7 @@ const Wrapper = styled.section`
     margin: 0 auto;
   }
 
-  .btns-container {
+  .links-container {
     max-width: 500px;
     display: flex;
     flex-direction: column;
@@ -71,7 +70,7 @@ const Wrapper = styled.section`
     margin: 2rem auto;
   }
 
-  .btn {
+  .links-btn {
     height: 40px;
     width: 100%;
     display: flex;
@@ -80,7 +79,7 @@ const Wrapper = styled.section`
     border: 2px solid;
   }
 
-  .social-icons {
+  .social-container {
     max-width: 500px;
     display: flex;
     align-items: center;

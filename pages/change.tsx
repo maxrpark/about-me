@@ -10,7 +10,7 @@ import { ProfileDataInt } from "../ts/interfaces";
 
 import styled from "styled-components";
 
-import { LinksModal, LinksButtons, LinksSocial } from "../components/";
+import { LinksModal, EditLinks } from "../components/";
 import UserLayout from "../components/layouts/UserLayout";
 
 interface Props {
@@ -18,8 +18,7 @@ interface Props {
 }
 
 const ChangePage: NextPage<Props> = ({ data }) => {
-  const { profileData, showModal, setData, selectItem, selectOrCreateItem } =
-    useGlobalContext();
+  const { profileData, showModal, setData } = useGlobalContext();
 
   useEffect(() => {
     setData(data);
@@ -30,8 +29,8 @@ const ChangePage: NextPage<Props> = ({ data }) => {
   return (
     <UserLayout>
       <Wrapper>
-        <LinksButtons />
-        <LinksSocial />
+        <EditLinks data={profileData.links} classType={"links"} />
+        <EditLinks data={profileData.social} classType={"social"} />
         {showModal && <LinksModal />}
       </Wrapper>
     </UserLayout>
@@ -39,7 +38,7 @@ const ChangePage: NextPage<Props> = ({ data }) => {
 };
 
 const Wrapper = styled.div`
-  .btns-container {
+  .links-container {
     max-width: 500px;
     display: flex;
     flex-direction: column;
@@ -49,13 +48,23 @@ const Wrapper = styled.div`
     margin: 2rem auto;
   }
 
-  .btn {
+  .links-btn,
+  .links-add {
     height: 40px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     border: 2px solid;
+  }
+
+  .social-container {
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto;
   }
 `;
 
