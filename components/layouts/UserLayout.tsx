@@ -8,7 +8,9 @@ interface Props {
   children: ReactElement;
 }
 const UserLayout: FC<Props> = ({ children }) => {
-  const { isSidebarOpen, toggleSidebar } = useUserThemeContext();
+  const { isSidebarOpen, toggleSidebar, themesColors, changeThemeColor } =
+    useUserThemeContext();
+
   return (
     <Wrapper>
       <nav>
@@ -20,6 +22,13 @@ const UserLayout: FC<Props> = ({ children }) => {
         <div className='content'>
           sidebar
           <div onClick={toggleSidebar}>close</div>
+          {themesColors.map((color: any) => {
+            return (
+              <h2 key={color.id} onClick={() => changeThemeColor(color.name)}>
+                {color.name}
+              </h2>
+            );
+          })}
         </div>
       </aside>
       {children}

@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { DefaultTheme } from "styled-components";
-
+// import { darkTheme, lightTheme } from "../theme";
 declare module "styled-components" {
   export interface DefaultTheme {
     mainColor: string;
@@ -8,18 +7,6 @@ declare module "styled-components" {
     specialColor: string;
   }
 }
-
-export const lightTheme: DefaultTheme = {
-  mainColor: "var(--main-dark-color-2)",
-  secondaryColor: "var(--main-dark-color-2)",
-  specialColor: "var(--main-dark-color-2)",
-};
-
-export const darktheme: DefaultTheme = {
-  mainColor: "var(--main-dark-color-2)",
-  secondaryColor: "var(--main-dark-color-2)",
-  specialColor: "var(--main-dark-color-2)",
-};
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -65,7 +52,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-  /* background: #1d1d1d; */
+  background:${(props) => props.theme.mainColor};
 }
 
 `;

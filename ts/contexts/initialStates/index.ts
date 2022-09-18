@@ -11,5 +11,5 @@ export interface GlobalInitialState {
 export interface UserThemeInitialState {
   theme: string;
   isSidebarOpen: boolean;
-  themesColor: any;
+  themesColors: any;
 }

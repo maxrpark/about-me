@@ -2,6 +2,8 @@ import React, { useReducer, useContext, useEffect } from "react";
 import user_theme_reducer from "../reducer/user_theme_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
 import { UserThemeInitialState } from "../ts/contexts/initialStates/index";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "../theme";
 
 type Props = {
   children: React.ReactNode;
@@ -15,14 +17,15 @@ const themesColor = [
 interface UserContext {
   theme: string;
   isSidebarOpen: boolean;
-  themesColor: any;
+  themesColors: any;
   toggleSidebar: () => void;
+  changeThemeColor: (themeName: string) => void;
 }
 
 const InitialState: UserThemeInitialState = {
   theme: "light",
   isSidebarOpen: false,
-  themesColor: themesColor,
+  themesColors: themesColor,
 };
 
 const UserThemeContext = React.createContext({} as UserContext);
@@ -38,9 +41,20 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
       type: ActionType.TOGGLE_SIDEBAR,
     });
   };
+
+  const changeThemeColor = (themeName: string) => {
+    dispatch({
+      type: ActionType.CHANGE_THEME_COLOR,
+      payload: themeName,
+    });
+  };
   return (
-    <UserThemeContext.Provider value={{ ...state, toggleSidebar }}>
-      {children}
+    <UserThemeContext.Provider
+      value={{ ...state, toggleSidebar, changeThemeColor }}
+    >
+      <ThemeProvider theme={state.theme === "light" ? lightTheme : darkTheme}>
+        {children}
+      </ThemeProvider>
     </UserThemeContext.Provider>
   );
 };

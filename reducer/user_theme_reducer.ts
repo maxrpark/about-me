@@ -12,6 +12,11 @@ const user_theme_reducer = (
         ...state,
         isSidebarOpen: !state.isSidebarOpen,
       };
+    case ActionType.CHANGE_THEME_COLOR:
+      return {
+        ...state,
+        theme: action.payload,
+      };
 
     default:
       return state;
