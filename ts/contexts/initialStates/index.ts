@@ -12,4 +12,6 @@ export interface UserThemeInitialState {
   theme: string;
   isSidebarOpen: boolean;
   themesColors: any;
+  layout: string;
+  themesLayouts: any;
 }

@@ -2,15 +2,16 @@
 
 ## Started
 
--   [x] Styles
--   [ ] Add types
+Continue with themeContext
+
+## TODO NEXT WEEK
 
 Boilerplate for developers to create a profile similar to Linktree.
 
 Admin can change the data from the frontend. Local DB from.
 
--   Build with Next.js
--   Next Auth
+- Build with Next.js
+- Next Auth
 
 ## Icons
 
@@ -18,25 +19,29 @@ Icons are located in the component/icons folders. They are SVG icons coming from
 
 ## Need to do
 
--   [x] Next Auth
-    -   [x] Login with git credentials
-    -   [x] Set user Admin
--   [ ] API
-    -   [x] Create endpoint to read and write data to json
-    -   [ ]
--   [ ] Styles
-    -   [ ] styled Components
-    -   [ ] Create Themes
-        -   [ ] Light
-        -   [ ] Dark
-        -   [ ] Pink
-        -   [ ] Lightgreen
-        -   [ ] Lightblue
-    -   [ ] Create layouts
-        -   [ ] Basic
-        -   [ ] Minimalist
-        -   [ ] ANOTHER ONE
--   [ ] Create theme or style context
--   [ ] Create Global Context
-    -   [ ] links
-    -   [ ] social
+- [x] Next Auth
+  - [x] Login with git credentials
+  - [x] Set user Admin
+  - [x] Create endpoint to read and write data to json
+    - [x] Links
+    - [ ] Themes
+- [-] Styles
+  - [x] styled Components
+  - [ ] Create wrappers
+    - [x] Links
+  - [ ] Create Themes
+    - [ ] Light
+    - [ ] Dark
+    - [ ] Pink
+    - [ ] Lightgreen
+    - [ ] Lightblue
+  - [ ] Create layouts
+    - [x] default
+    - [ ] minimalist
+    - [ ] styled
+    - [ ] ANOTHER ONE
+- [-] Create theme or style context
+  - [ ]
+- [ ] Create Global Context
+  - [x] links
+  - [x] social

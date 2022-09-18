@@ -7,6 +7,11 @@ const user_theme_reducer = (
   action: Action
 ): UserThemeInitialState => {
   switch (action.type) {
+    case ActionType.SET_THEME_DATA:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case ActionType.TOGGLE_SIDEBAR:
       return {
         ...state,
@@ -16,6 +21,11 @@ const user_theme_reducer = (
       return {
         ...state,
         theme: action.payload,
+      };
+    case ActionType.CHANGE_THEME_LAYOUT:
+      return {
+        ...state,
+        layout: action.payload,
       };
 
     default:

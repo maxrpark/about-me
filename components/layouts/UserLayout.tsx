@@ -8,8 +8,14 @@ interface Props {
   children: ReactElement;
 }
 const UserLayout: FC<Props> = ({ children }) => {
-  const { isSidebarOpen, toggleSidebar, themesColors, changeThemeColor } =
-    useUserThemeContext();
+  const {
+    isSidebarOpen,
+    themesColors,
+    themesLayouts,
+    toggleSidebar,
+    changeThemeColor,
+    changeThemeLayout,
+  } = useUserThemeContext();
 
   return (
     <Wrapper>
@@ -26,6 +32,14 @@ const UserLayout: FC<Props> = ({ children }) => {
             return (
               <h2 key={color.id} onClick={() => changeThemeColor(color.name)}>
                 {color.name}
+              </h2>
+            );
+          })}
+          <h2 style={{ margin: "2rem" }}>Layouts</h2>
+          {themesLayouts.map((theme: any) => {
+            return (
+              <h2 key={theme.id} onClick={() => changeThemeLayout(theme.name)}>
+                {theme.name}
               </h2>
             );
           })}

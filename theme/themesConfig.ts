@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { minimalistLayout } from "./layouts/index";
 // import { darkTheme, lightTheme } from "../theme";
 declare module "styled-components" {
   export interface DefaultTheme {
@@ -54,5 +55,9 @@ export const GlobalStyle = createGlobalStyle`
 body{
   background:${(props) => props.theme.mainColor};
 }
+
+
+${minimalistLayout}
+
 
 `;

@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
-import fsPromises from "fs/promises";
-import path from "path";
-import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
+
+import getData from "../utils/getData";
+
+import styled from "styled-components";
+import { LinkWrapper } from "../styles/wrappers";
 import { MyLinks } from "../components";
 import { ProfileDataInt, LinkItemInt } from "../ts/interfaces";
-import Link from "next/link";
 
 interface Props {
   data: ProfileDataInt;
@@ -25,9 +27,10 @@ const Home: NextPage<Props> = ({ data }) => {
           alt={"user-img"}
         />
       </figure>
-      <MyLinks data={links} classType={"links"} />
-      <MyLinks data={social} classType={"social"} />
-
+      <LinkWrapper className='layout'>
+        <MyLinks data={links} classType={"links"} />
+        <MyLinks data={social} classType={"social"} />
+      </LinkWrapper>
       <Link href={"/admin"}>admin</Link>
       <Link href={"/login"}>login</Link>
     </Wrapper>
@@ -35,9 +38,8 @@ const Home: NextPage<Props> = ({ data }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const filePath = path.join(process.cwd(), "db/db_about_me.json");
-  const jsonData = await fsPromises.readFile(filePath);
-  const objectData: LinkItemInt = JSON.parse(jsonData.toString());
+  const objectData: LinkItemInt = await getData("db/db_about_me.json");
+
   return {
     props: {
       data: objectData,
@@ -46,46 +48,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 const Wrapper = styled.section`
-  background: papayawhip;
-
   .user-image {
     width: 100px;
     height: 100px;
     display: flex;
     justify-content: center;
-
     align-items: center;
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
-  }
-
-  .links-container {
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem auto;
-  }
-
-  .links-btn {
-    height: 40px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-  }
-
-  .social-container {
-    max-width: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem auto;
   }
 `;
 
