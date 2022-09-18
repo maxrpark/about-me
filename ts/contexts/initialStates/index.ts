@@ -1,4 +1,4 @@
-export interface InitialState {
+export interface GlobalInitialState {
   name: string;
   profileData: any;
   isEditing: boolean;
@@ -6,4 +6,10 @@ export interface InitialState {
   selectedLink: any;
   linkType: string;
   availableIcons: any;
+}
+
+export interface UserThemeInitialState {
+  theme: string;
+  isSidebarOpen: boolean;
+  themesColor: any;
 }

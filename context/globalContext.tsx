@@ -1,7 +1,7 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import global_reducer from "../reducer/global_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
-import { InitialState } from "../ts/contexts/initialStates";
+import { GlobalInitialState } from "../ts/contexts/initialStates";
 import { v4 as uuidv4 } from "uuid";
 import { LinkItemInt, ProfileDataInt } from "../ts/interfaces";
 import { AvailableIcons } from "../components/icons";
@@ -39,7 +39,7 @@ interface GlobalContext {
   handleFormSubmit: (e: React.FormEvent) => void;
 }
 
-const initialState: InitialState = {
+const initialState: GlobalInitialState = {
   name: "max",
   profileData: [],
   isEditing: false,
@@ -58,7 +58,7 @@ const GlobalContext = React.createContext({} as GlobalContext);
 export const GlobalProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(
     global_reducer,
-    initialState as InitialState
+    initialState as GlobalInitialState
   );
 
   const setData = (data: any) => {

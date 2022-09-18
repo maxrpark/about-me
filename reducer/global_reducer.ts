@@ -1,9 +1,12 @@
 import { Action } from "../ts/contexts/actions/global_actions";
 import { ActionType } from "../ts/contexts/actions-types";
-import { InitialState } from "../ts/contexts/initialStates";
+import { GlobalInitialState } from "../ts/contexts/initialStates";
 import { LinkItemInt } from "../ts/interfaces";
 
-const global_reducer = (state: InitialState, action: Action): InitialState => {
+const global_reducer = (
+  state: GlobalInitialState,
+  action: Action
+): GlobalInitialState => {
   switch (action.type) {
     case ActionType.SET_DATA:
       return {
