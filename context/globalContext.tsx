@@ -143,7 +143,11 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   };
 
   const saveChanges = async () => {
-    await axios.post("/api/db", state.profileData);
+    const body = {
+      data: state.profileData,
+      fileName: "db_about_me",
+    };
+    await axios.post("/api/db", body);
   };
 
   useEffect(() => {

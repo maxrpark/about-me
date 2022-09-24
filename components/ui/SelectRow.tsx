@@ -17,7 +17,6 @@ const SelectRow: React.FC<Props> = ({
   options,
 }) => {
   const { selectedLink } = useGlobalContext();
-  console.log(selectedLink.name);
 
   return (
     <div className='col-12'>

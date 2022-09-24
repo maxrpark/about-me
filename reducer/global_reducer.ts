@@ -61,7 +61,6 @@ const global_reducer = (
         ...state.selectedLink,
         id: action.payload,
       };
-      console.log(state.linkType);
 
       return {
         ...state,

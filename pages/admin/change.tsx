@@ -3,14 +3,14 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { getSession } from "next-auth/react";
 
-import { useGlobalContext, useUserThemeContext } from "../context/";
-import { ProfileDataInt } from "../ts/interfaces";
+import { useGlobalContext, useUserThemeContext } from "../../context";
+import { ProfileDataInt } from "../../ts/interfaces";
 
-import { LinksModal, EditLinks } from "../components/";
-import UserLayout from "../components/layouts/UserLayout";
-import { LinkWrapper } from "../styles/wrappers";
+import { LinksModal, EditLinks } from "../../components";
+import UserLayout from "../../components/layouts/UserLayout";
+import { LinkWrapper } from "../../styles/wrappers";
 
-import getData from "../utils/getData";
+import getData from "../../utils/getData";
 
 interface Props {
   linksData: ProfileDataInt;
@@ -25,7 +25,7 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
     setData(linksData);
     setThemeData(themesData);
   }, []);
-  if (!profileData.links) {
+  if (!profileData?.links) {
     return <h2>Loading!</h2>;
   }
   return (
@@ -40,24 +40,14 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx);
-  if (session?.user?.isAdmin) {
-    const linksData: ProfileDataInt = await getData("db/db_about_me.json");
-    const themesData: any = await getData("db/db_themes_options.json");
+  const linksData: ProfileDataInt = await getData("db/db_about_me.json");
+  const themesData: any = await getData("db/db_themes_options.json");
 
-    return {
-      props: {
-        linksData,
-        themesData,
-      },
-    };
-  }
   return {
-    redirect: {
-      permanent: false,
-      destination: "/admin",
+    props: {
+      linksData,
+      themesData,
     },
-    props: {},
   };
 };
 

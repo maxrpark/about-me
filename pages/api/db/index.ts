@@ -1,12 +1,19 @@
 import { NextApiHandler } from "next";
 const fs = require("fs");
+import { getToken } from "next-auth/jwt";
 
-const handler: NextApiHandler = (req, res) => {
-    //...
-    if (req.method === "POST") {
-        fs.writeFileSync("./db/db_about_me.json", JSON.stringify(req.body));
-        return res.status(200).json({});
-    }
+const handler: NextApiHandler = async (req, res) => {
+  //...
+  const token = await getToken({ req });
+  //   if (!token || token.email !== process.env.ADMINISTRATOR) {
+  //     return res.status(401).json({ msg: "Unauthorized to visit this route" });
+  //   }
+
+  if (req.method === "POST") {
+    const { data, fileName } = req.body;
+    fs.writeFileSync(`./db/${fileName}.json`, JSON.stringify(data));
+    return res.status(200).json({ msg: "succeeded" });
+  }
 };
 
 export default handler;

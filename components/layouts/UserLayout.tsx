@@ -21,7 +21,7 @@ const UserLayout: FC<Props> = ({ children }) => {
     <Wrapper>
       <nav>
         <Link href={"/"}>Home</Link>
-        <Link href={"/change"}>change</Link>
+        <Link href={"/admin/change"}>change</Link>
         <div onClick={toggleSidebar}>Change Theme</div>
       </nav>
       <aside className={`${isSidebarOpen ? "sidebar-open" : ""} sidebar`}>
