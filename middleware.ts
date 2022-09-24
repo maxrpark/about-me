@@ -1,11 +1,11 @@
 import withAuth from "next-auth/middleware";
-import type { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export default withAuth(
   //
   function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith("/admin")) {
-      // This logic is only applied to /about
+      // This logic is only applied to /admin
     }
   },
   {
@@ -20,10 +20,5 @@ export default withAuth(
   }
 );
 export const config = {
-  matcher: [
-    "/admin",
-    "/admin/change",
-
-    // "/api/db"
-  ],
+  matcher: ["/admin", "/admin/change"],
 };

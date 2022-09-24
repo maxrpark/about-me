@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.26",
-    "axios": "^0.27.2",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "react": "18.2.0",
