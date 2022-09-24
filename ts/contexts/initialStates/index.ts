@@ -6,11 +6,13 @@ export interface GlobalInitialState {
   selectedLink: any;
   linkType: string;
   availableIcons: any;
+  updateData: boolean;
 }
 
 export interface UserThemeInitialState {
   theme: string;
   isSidebarOpen: boolean;
+  updateData: boolean;
   themesColors: any;
   layout: string;
   themesLayouts: any;

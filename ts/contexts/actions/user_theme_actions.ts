@@ -16,8 +16,13 @@ interface CHANGE_THEME_LAYOUT {
   payload: string;
 }
 
+interface UPDATE_DATA_END {
+  type: ActionType.UPDATE_DATA_END;
+}
+
 export type Action =
   | TOGGLE_SIDEBAR
   | CHANGE_THEME_COLOR
   | CHANGE_THEME_LAYOUT
+  | UPDATE_DATA_END
   | SET_THEME_DATA;

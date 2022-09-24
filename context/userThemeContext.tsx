@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from "react";
+import React, { useReducer, useContext, useEffect, useState } from "react";
 import user_theme_reducer from "../reducer/user_theme_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
 import { UserThemeInitialState } from "../ts/contexts/initialStates/index";
@@ -26,6 +26,7 @@ interface UserContext {
   isSidebarOpen: boolean;
   themesColors: any;
   themesLayouts: any;
+  updateData: boolean;
   setThemeData: (data: any) => void;
   toggleSidebar: () => void;
   changeThemeColor: (themeName: string) => void;
@@ -34,10 +35,11 @@ interface UserContext {
 
 const InitialState: UserThemeInitialState = {
   theme: "light",
+  layout: "default",
   isSidebarOpen: false,
+  updateData: false,
   themesColors: themesColor,
   themesLayouts: themesLayouts,
-  layout: "default",
 };
 
 const UserThemeContext = React.createContext({} as UserContext);
@@ -73,11 +75,32 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
       payload: layoutName,
     });
   };
+
   useEffect(() => {
     const body = document.querySelector("body")!;
     body.removeAttribute("class");
     document.querySelector("body")!.classList.add(state.layout);
   }, [state.layout]);
+
+  const saveChanges = async () => {
+    const body = {
+      data: { theme: state.theme, layout: state.layout },
+      fileName: "db_themes_options",
+    };
+    await fetch("/api/db", { method: "POST", body: JSON.stringify(body) });
+    dispatch({
+      type: ActionType.UPDATE_DATA_END,
+    });
+    console.log("end");
+  };
+
+  useEffect(() => {
+    if (state.updateData) {
+      console.log("update");
+      saveChanges();
+    }
+  }, [state.theme, state.layout]);
+
   return (
     <UserThemeContext.Provider
       value={{

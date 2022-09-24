@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { getSession } from "next-auth/react";
 
 import { useGlobalContext, useUserThemeContext } from "../../context";
-import { ProfileDataInt } from "../../ts/interfaces";
+import { ProfileDataInt, ThemeDataInt } from "../../ts/interfaces";
 
 import { LinksModal, EditLinks } from "../../components";
 import UserLayout from "../../components/layouts/UserLayout";
@@ -41,7 +41,7 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const linksData: ProfileDataInt = await getData("db/db_about_me.json");
-  const themesData: any = await getData("db/db_themes_options.json");
+  const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
 
   return {
     props: {

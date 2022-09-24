@@ -21,11 +21,18 @@ const user_theme_reducer = (
       return {
         ...state,
         theme: action.payload,
+        updateData: true,
       };
     case ActionType.CHANGE_THEME_LAYOUT:
       return {
         ...state,
         layout: action.payload,
+        updateData: true,
+      };
+    case ActionType.UPDATE_DATA_END:
+      return {
+        ...state,
+        updateData: false,
       };
 
     default:

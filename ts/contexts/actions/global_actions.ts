@@ -46,6 +46,10 @@ interface SELECTED_LINK_TYPE {
   payload: string;
 }
 
+interface UPDATE_DATA_END {
+  type: ActionType.UPDATE_DATA_END;
+}
+
 export type Action =
   | SET_DATA
   | DELETE_ITEM
@@ -54,4 +58,5 @@ export type Action =
   | EDIT_ITEM
   | TOGGLE_MODAL
   | SELECTED_LINK_TYPE
+  | UPDATE_DATA_END
   | ADD_ITEM;

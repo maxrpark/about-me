@@ -26,8 +26,9 @@ interface GlobalContext {
   selectedLink: LinkItemInt;
   linkType: string;
   availableIcons: any;
+  updateData: boolean;
   setData: (data: any) => void;
-  saveChanges: () => void;
+  saveThemeChanges: () => void;
   selectOrCreateItem: (linkType: string) => void;
   deleteItem: (id: string, linkType: string) => void;
   selectItem: (id: string, linkType: string) => void;
@@ -45,6 +46,7 @@ const initialState: GlobalInitialState = {
   isEditing: false,
   showModal: false,
   availableIcons: AvailableIcons,
+  updateData: false,
   linkType: "",
   selectedLink: {
     id: "",
@@ -119,7 +121,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
-  const deleteItem = (id: string, linkType: string) => {
+  const deleteItem = (id: string) => {
     dispatch({
       type: ActionType.DELETE_ITEM,
       payload: id,
@@ -142,19 +144,24 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
-  const saveChanges = async () => {
+  const saveThemeChanges = async () => {
     const body = {
       data: state.profileData,
       fileName: "db_about_me",
     };
     await fetch("/api/db", { method: "POST", body: JSON.stringify(body) });
+    dispatch({
+      type: ActionType.UPDATE_DATA_END,
+    });
+    console.log("end");
   };
 
   useEffect(() => {
-    if (state.profileData.links) {
-      saveChanges();
+    if (state.updateData) {
+      console.log("update");
+      saveThemeChanges();
     }
-  }, [state.profileData[state.linkType]]);
+  }, [state.profileData.links, state.profileData.social]);
 
   return (
     <GlobalContext.Provider
@@ -163,7 +170,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         setData,
         deleteItem,
         selectItem,
-        saveChanges,
+        saveThemeChanges,
         handleInputChange,
         handleFormSubmit,
         selectOrCreateItem,

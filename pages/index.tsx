@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,14 +8,22 @@ import getData from "../utils/getData";
 import styled from "styled-components";
 import { LinkWrapper } from "../styles/wrappers";
 import { MyLinks } from "../components";
-import { ProfileDataInt, LinkItemInt } from "../ts/interfaces";
+import { ProfileDataInt, LinkItemInt, ThemeDataInt } from "../ts/interfaces";
+import { useUserThemeContext } from "../context";
+import { useEffect } from "react";
 
 interface Props {
-  data: ProfileDataInt;
+  linksData: ProfileDataInt;
+  themesData: any;
 }
 
-const Home: NextPage<Props> = ({ data }) => {
-  const { links, social } = data;
+const Home: NextPage<Props> = ({ linksData, themesData }) => {
+  const { links, social } = linksData;
+  const { setThemeData } = useUserThemeContext();
+
+  useEffect(() => {
+    setThemeData(themesData);
+  }, []);
 
   return (
     <Wrapper>
@@ -37,15 +45,28 @@ const Home: NextPage<Props> = ({ data }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const objectData: LinkItemInt = await getData("db/db_about_me.json");
+export const getStaticProps: GetStaticProps = async () => {
+  const linksData: LinkItemInt = await getData("db/db_about_me.json");
+  const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
 
   return {
     props: {
-      data: objectData,
+      linksData,
+      themesData,
     },
+    revalidate: 10, // In seconds
   };
 };
+
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
+
+//   return {
+//     props: {
+//       themesData,
+//     },
+//   };
+// };
 
 const Wrapper = styled.section`
   .user-image {

@@ -69,6 +69,7 @@ const global_reducer = (
           [state.linkType]: [...state.profileData[state.linkType], newLink],
         },
         isEditing: false,
+        updateData: true,
       };
     case ActionType.EDIT_ITEM:
       let tempList = state.profileData[state.linkType].map(
@@ -88,10 +89,10 @@ const global_reducer = (
         ...state,
         profileData: editedProfileData,
         isEditing: false,
+        updateData: true,
       };
     case ActionType.DELETE_ITEM:
       const { profileData } = state;
-
       profileData[state.linkType] = state.profileData[state.linkType].filter(
         (item: LinkItemInt) => item.id !== action.payload
       );
@@ -99,6 +100,13 @@ const global_reducer = (
       return {
         ...state,
         profileData,
+        updateData: true,
+      };
+
+    case ActionType.UPDATE_DATA_END:
+      return {
+        ...state,
+        updateData: false,
       };
 
     default:
