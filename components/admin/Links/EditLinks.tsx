@@ -20,9 +20,10 @@ const EditLinks: React.FC<Props> = ({ data, classType }) => {
         return (
           <div className={`${classType}-btn`} key={link.id}>
             {classType === "social" ? (
-              <div key={link.id} onClick={() => selectItem(link.id, "social")}>
-                <SocialIcon />
-              </div>
+              <SocialIcon
+                key={link.id}
+                onClick={() => selectItem(link.id, "social")}
+              />
             ) : (
               <>
                 {name}

@@ -53,6 +53,7 @@ const UserLayout: FC<Props> = ({ children }) => {
 const Wrapper = styled.div`
   height: 100vh;
   position: relative;
+  overflow: hidden;
   .sidebar {
     height: 100vh;
     width: 100%;
@@ -69,13 +70,12 @@ const Wrapper = styled.div`
     z-index: 10;
   }
   .content {
-    position: absolute;
+    /* position: absolute; */
     height: 100vh;
     width: 40%;
-    top: 0;
-    right: 0;
+    margin-left: auto;
     transition: 0.3s linear all;
-    background: red;
+    background: blue;
     transform: translateX(100%);
   }
   .sidebar-open .content {

@@ -3,9 +3,9 @@ import { minimalistLayout } from "./layouts/index";
 // import { darkTheme, lightTheme } from "../theme";
 declare module "styled-components" {
   export interface DefaultTheme {
-    mainColor: string;
-    secondaryColor: string;
-    specialColor: string;
+    primary: string;
+    primaryLight: string;
+    primaryDark: string;
   }
 }
 
@@ -18,6 +18,18 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 :root {
+
+  --box-shadow-1: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  --transition-1: all 0.3s linear
+
+  /* colors */
+  --default-primary: #E3F2FD;
+  --default-primary-light: #FFFFFF;
+  --default-primary-dark: #85929C;
+
+
+
+  /*  */
   --color-white-1: #fff;
   --color-black-1: #1d1d1d;
   --btn-color: #5469d4;
@@ -32,7 +44,7 @@ export const GlobalStyle = createGlobalStyle`
   --modal-background-dark: rgba(44, 44, 44, 0.726);
 
   /* theme */
-  --backgroung-color: #eeebd0;
+  --backgroung-color: white;
   --color-primary: #ffffff;
   --dark-background: #1d1d1d;
   --primary-white: #ffffff;
@@ -41,7 +53,7 @@ export const GlobalStyle = createGlobalStyle`
   --main-dark-color-2: #333333;
   --main-dark-color-3: #4d4d4d;
 
-  --main-light-color-1: #eeebd0;
+  --main-light-color-1: white;
   --main-light-color-2: #f5f5f5;
   --main-light-color-3: #e5e5e5;
 
@@ -53,7 +65,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-  background:${(props) => props.theme.mainColor};
+  background:${(props) => props.theme.primary};
 }
 
 

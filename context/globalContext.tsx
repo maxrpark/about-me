@@ -6,8 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import { LinkItemInt, ProfileDataInt } from "../ts/interfaces";
 import { AvailableIcons } from "../components/icons";
 
-import axios from "axios";
-
 type Props = {
   children: React.ReactNode;
 };
@@ -153,12 +151,10 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     dispatch({
       type: ActionType.UPDATE_DATA_END,
     });
-    console.log("end");
   };
 
   useEffect(() => {
     if (state.updateData) {
-      console.log("update");
       saveThemeChanges();
     }
   }, [state.profileData.links, state.profileData.social]);

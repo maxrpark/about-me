@@ -42,6 +42,6 @@ Icons are located in the component/icons folders. They are SVG icons coming from
     - [ ] ANOTHER ONE
 - [-] Create theme or style context
   - [ ]
-- [ ] Create Global Context
+- [x] Create Global Context
   - [x] links
   - [x] social

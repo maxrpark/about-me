@@ -1,5 +1,6 @@
-import { darkTheme } from "./darkTheme";
-import { lightTheme } from "./lightTheme";
+import { darkTheme } from "./themeColors/dark";
+import { lightTheme } from "./themeColors/light";
+import { defaultTheme } from "./themeColors/default";
 import { GlobalStyle } from "./themesConfig";
 
-export { darkTheme, lightTheme, GlobalStyle };
+export { darkTheme, lightTheme, defaultTheme, GlobalStyle };
