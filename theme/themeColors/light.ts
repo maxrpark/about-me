@@ -1,7 +1,7 @@
 import { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
-  primary: "var(--main-light-color-1)",
-  primaryLight: "var(--main-dark-color-2)",
-  primaryDark: "var(--main-dark-color-2)",
+  bgColor: "var(--light-primary-light)",
+  textColor: "var(--light-primary-dark)",
+  buttonColor: "var(--light-primary)",
 };

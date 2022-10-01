@@ -3,9 +3,9 @@ import { minimalistLayout } from "./layouts/index";
 // import { darkTheme, lightTheme } from "../theme";
 declare module "styled-components" {
   export interface DefaultTheme {
-    primary: string;
-    primaryLight: string;
-    primaryDark: string;
+    textColor: string;
+    bgColor: string;
+    buttonColor: string;
   }
 }
 
@@ -19,57 +19,53 @@ export const GlobalStyle = createGlobalStyle`
 
 :root {
 
-  --box-shadow-1: 0px 2px 10px rgba(0, 0, 0, 0.25);
-  --transition-1: all 0.3s linear
 
-  /* colors */
+
+
+  /* theme colors */
+
+  /* default */
   --default-primary: #E3F2FD;
   --default-primary-light: #FFFFFF;
   --default-primary-dark: #85929C;
 
+  /* dark */
+  --dark-primary: #484848;
+  --dark-primary-light: #FFFFFFCC;
+  --dark-primary-dark: #212121;
+
+  /* pink */
+  --pink-primary: #FFEBEE;
+  --pink-primary-light: #FFFBFF;
+  --pink-primary-dark: #AF8EB5;
+
+  /* light */
+  --light-primary: #E8F5E9;
+  --light-primary-light: #FBFBFB;
+  --light-primary-dark: #484848;
 
 
   /*  */
   --color-white-1: #fff;
   --color-black-1: #1d1d1d;
-  --btn-color: #5469d4;
-  --border-radius-1: 5px;
-  --border-radius-2: 10px;
+
   --box-shadow-1: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   --box-shadow-2: rgba(0, 0, 0, 0.2) 0px 6px 15px;
-  --transition-1: all 0.3s ease-in-out;
-  --primary-font-family: 'Poppins', sans-serif;
+  --transition-1: all 0.3s linear;
 
-  --modal-background-light: rgba(0,0,0,0.5);
-  --modal-background-dark: rgba(44, 44, 44, 0.726);
 
-  /* theme */
-  --backgroung-color: white;
-  --color-primary: #ffffff;
-  --dark-background: #1d1d1d;
-  --primary-white: #ffffff;
 
-  --main-dark-color-1: #1d1d1d;
-  --main-dark-color-2: #333333;
-  --main-dark-color-3: #4d4d4d;
-
-  --main-light-color-1: white;
-  --main-light-color-2: #f5f5f5;
-  --main-light-color-3: #e5e5e5;
-
-  --special-color-1: crimson;
-  --special-color-2: crimson;
-
-  --text-color-light-theme: #ffffff;
-  --text-color-dark-theme: #918f8f;
 }
 
 body{
-  background:${(props) => props.theme.primary};
+  background:${(props) => props.theme.bgColor};
+  color:${(props) => props.theme.textColor};
+}
+a{
+    color:${(props) => props.theme.textColor};
 }
 
 
 ${minimalistLayout}
-
 
 `;

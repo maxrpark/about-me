@@ -12,6 +12,7 @@ const UserLayout: FC<Props> = ({ children }) => {
     isSidebarOpen,
     themesColors,
     themesLayouts,
+    theme,
     toggleSidebar,
     changeThemeColor,
     changeThemeLayout,
@@ -58,7 +59,7 @@ const Wrapper = styled.div`
     height: 100vh;
     width: 100%;
     position: absolute;
-    background: rgba(0, 0, 0, 0.475);
+    /* background: rgba(0, 0, 0, 0.475); */
     top: 0;
     right: 0;
     z-index: -10;

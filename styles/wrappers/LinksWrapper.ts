@@ -3,6 +3,8 @@ import styled from "styled-components";
 const LinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 3rem;
+  padding: 0.5rem;
 
   .links-container {
     width: 100%;
@@ -12,7 +14,7 @@ const LinkWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    margin: 2rem auto;
+    margin: 0 auto;
   }
 
   .links-btn,
@@ -22,10 +24,10 @@ const LinkWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid;
     border-radius: 20px;
     transition: var(--transition-1);
     box-shadow: var(--box-shadow-1);
+    background: ${(props) => props.theme.buttonColor};
   }
 
   .social-container {
@@ -36,7 +38,7 @@ const LinkWrapper = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin: 2rem auto;
+    margin: 0 auto;
   }
 
   .social-btn,
@@ -55,6 +57,9 @@ const LinkWrapper = styled.div`
     background: white;
     padding: 0.7rem;
     box-shadow: var(--box-shadow-1);
+    background: ${(props) => props.theme.buttonColor};
+    color: ${(props) => props.theme.textColor};
+    fill: ${(props) => props.theme.textColor};
   }
 `;
 
