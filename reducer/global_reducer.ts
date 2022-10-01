@@ -17,6 +17,7 @@ const global_reducer = (
       return {
         ...state,
         linkType: action.payload,
+        showModal: true,
       };
     case ActionType.TOGGLE_MODAL:
       return {
@@ -101,6 +102,7 @@ const global_reducer = (
         ...state,
         profileData,
         updateData: true,
+        showModal: false,
       };
 
     case ActionType.UPDATE_DATA_END:

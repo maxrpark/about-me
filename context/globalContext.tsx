@@ -27,6 +27,7 @@ interface GlobalContext {
   updateData: boolean;
   setData: (data: any) => void;
   saveThemeChanges: () => void;
+  closeModal: () => void;
   selectOrCreateItem: (linkType: string) => void;
   deleteItem: (id: string, linkType: string) => void;
   selectItem: (id: string, linkType: string) => void;
@@ -126,6 +127,12 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
+  const closeModal = () => {
+    dispatch({
+      type: ActionType.TOGGLE_MODAL,
+    });
+  };
+
   const selectItem = (id: string, linkType: string) => {
     dispatch({
       type: ActionType.TOGGLE_MODAL,
@@ -170,6 +177,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         handleInputChange,
         handleFormSubmit,
         selectOrCreateItem,
+        closeModal,
       }}
     >
       {children}

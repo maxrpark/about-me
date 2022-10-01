@@ -18,19 +18,17 @@ const EditLinks: React.FC<Props> = ({ data, classType }) => {
           SocialIcon = icons[name as IconType];
         }
         return (
-          <div className={`${classType}-btn`} key={link.id}>
+          <div
+            onClick={() => selectItem(link.id, classType)}
+            className={`${classType}-btn`}
+            key={link.id}
+          >
             {classType === "social" ? (
-              <SocialIcon
-                key={link.id}
-                onClick={() => selectItem(link.id, "social")}
-              />
+              <SocialIcon key={link.id} />
             ) : (
               <>
                 {name}
-                <span
-                  className='pencil'
-                  onClick={() => selectItem(link.id, classType)}
-                >
+                <span className='pencil'>
                   <Pencil />
                 </span>
               </>
