@@ -1,6 +1,7 @@
 import { ReactElement, FC } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import { signOut } from "next-auth/react";
 
 import React from "react";
 import { useUserThemeContext } from "../../context/userThemeContext";
@@ -12,7 +13,6 @@ const UserLayout: FC<Props> = ({ children }) => {
     isSidebarOpen,
     themesColors,
     themesLayouts,
-    theme,
     toggleSidebar,
     changeThemeColor,
     changeThemeLayout,
@@ -22,7 +22,8 @@ const UserLayout: FC<Props> = ({ children }) => {
     <Wrapper>
       <nav>
         <Link href={"/"}>Home</Link>
-        <Link href={"/admin/change"}>change</Link>
+        ||
+        <button onClick={() => signOut()}>Sign out</button>;
         <div onClick={toggleSidebar}>Change Theme</div>
       </nav>
       <aside className={`${isSidebarOpen ? "sidebar-open" : ""} sidebar`}>

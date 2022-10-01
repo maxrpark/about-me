@@ -28,19 +28,19 @@ const Home: NextPage<Props> = ({ linksData, themesData }) => {
   return (
     <Wrapper>
       <figure className='user-image'>
-        <Image
-          src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
-          width={100}
-          height={100}
-          alt={"user-img"}
-        />
+        <Link href={"/admin"}>
+          <Image
+            src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
+            width={100}
+            height={100}
+            alt={"user-img"}
+          />
+        </Link>
       </figure>
       <LinkWrapper className='layout'>
         <MyLinks data={links} classType={"links"} />
         <MyLinks data={social} classType={"social"} />
       </LinkWrapper>
-      <Link href={"/admin"}>admin</Link>
-      <Link href={"/login"}>login</Link>
     </Wrapper>
   );
 };

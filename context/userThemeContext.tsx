@@ -3,24 +3,24 @@ import user_theme_reducer from "../reducer/user_theme_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
 import { UserThemeInitialState } from "../ts/contexts/initialStates/index";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, defaultTheme, pinkTheme } from "../theme";
+import { themesList } from "../theme";
 
 type Props = {
   children: React.ReactNode;
 };
 
-const themesList: any = {
-  default: defaultTheme,
-  dark: darkTheme,
-  pink: pinkTheme,
-  light: lightTheme,
-};
+enum ThemeColor {
+  DEFAULT = "default",
+  DARK = "dark",
+  PINK = "pink",
+  LIGHT = "light",
+}
 
 const themesColor = [
-  { id: 1, name: "default" },
-  { id: 2, name: "dark" },
-  { id: 3, name: "pink" },
-  { id: 4, name: "light" },
+  { id: 1, name: ThemeColor.DEFAULT },
+  { id: 2, name: ThemeColor.DARK },
+  { id: 3, name: ThemeColor.PINK },
+  { id: 4, name: ThemeColor.LIGHT },
 ];
 
 const themesLayouts = [
@@ -43,7 +43,7 @@ interface UserContext {
 }
 
 const InitialState: UserThemeInitialState = {
-  theme: "default",
+  theme: ThemeColor.DEFAULT,
   layout: "default",
   isSidebarOpen: false,
   updateData: false,
@@ -109,8 +109,6 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
       saveChanges();
     }
   }, [state.theme, state.layout]);
-
-  // console.log(state.theme);
 
   return (
     <UserThemeContext.Provider

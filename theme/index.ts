@@ -4,4 +4,11 @@ import { defaultTheme } from "./themeColors/default";
 import { pinkTheme } from "./themeColors/pink";
 import { GlobalStyle } from "./themesConfig";
 
-export { darkTheme, lightTheme, defaultTheme, pinkTheme, GlobalStyle };
+const themesList: any = {
+  default: defaultTheme,
+  dark: darkTheme,
+  pink: pinkTheme,
+  light: lightTheme,
+};
+
+export { themesList, GlobalStyle };

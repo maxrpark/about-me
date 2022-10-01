@@ -1,40 +1,54 @@
-import type { NextPage } from "next";
-import { getSession, signOut } from "next-auth/react";
 import { GetServerSideProps } from "next";
-import { User } from "../../ts/interfaces/interfaces";
-import Link from "next/link";
+import type { NextPage } from "next";
+
+import { useEffect } from "react";
+
+import { useGlobalContext, useUserThemeContext } from "../../context";
+import { ProfileDataInt, ThemeDataInt } from "../../ts/interfaces";
+
+import { LinksModal, EditLinks } from "../../components";
 import UserLayout from "../../components/layouts/UserLayout";
+import { LinkWrapper } from "../../styles/wrappers";
+
+import getData from "../../utils/getData";
 
 interface Props {
-  user: User;
+  linksData: ProfileDataInt;
+  themesData: any;
 }
 
-const AdminPage: NextPage<Props> = ({ user }) => {
+const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
+  const { profileData, showModal, setData } = useGlobalContext();
+  const { setThemeData } = useUserThemeContext();
+
+  useEffect(() => {
+    setData(linksData);
+    setThemeData(themesData);
+  }, []);
+  if (!profileData?.links) {
+    return <h2>Loading!</h2>;
+  }
   return (
     <UserLayout>
-      <>
-        Hello
-        <h2>{user.email}</h2>
-        <h2>{user.name}</h2>
-        Signed in as {user.email} <br />
-        <button>
-          <Link href='/admin/change'>Edit Links</Link>
-        </button>
-        <button onClick={() => signOut()}>Sign out</button>
-        <button>Change theme</button>
-      </>
+      <LinkWrapper className='layout'>
+        <EditLinks data={profileData.links} classType={"links"} />
+        <EditLinks data={profileData.social} classType={"social"} />
+        {showModal && <LinksModal />}
+      </LinkWrapper>
     </UserLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx);
+  const linksData: ProfileDataInt = await getData("db/db_about_me.json");
+  const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
 
   return {
     props: {
-      user: session!.user,
+      linksData,
+      themesData,
     },
   };
 };
 
-export default AdminPage;
+export default ChangePage;
