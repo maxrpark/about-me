@@ -29,19 +29,17 @@ Icons are located in the component/icons folders. They are SVG icons coming from
   - [x] styled Components
   - [ ] Create wrappers
     - [x] Links
-  - [ ] Create Themes
-    - [ ] Light
-    - [ ] Dark
-    - [ ] Pink
-    - [ ] Lightgreen
-    - [ ] Lightblue
+  - [x] Create Themes
+    - [x] Default
+    - [x] Dark
+    - [x] Pink
+    - [x] Light
   - [ ] Create layouts
     - [x] default
-    - [ ] minimalist
+    - [x] minimalist
     - [ ] styled
-    - [ ] ANOTHER ONE
 - [-] Create theme or style context
-  - [ ]
+  - [x]
 - [x] Create Global Context
   - [x] links
   - [x] social

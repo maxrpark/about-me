@@ -1,6 +1,6 @@
 import { useGlobalContext } from "../../../context/globalContext";
 import { LinkItemInt } from "../../../ts/interfaces";
-import { icons, IconType } from "../../icons";
+import { icons, IconType, Pencil } from "../../icons";
 
 interface Props {
   data: LinkItemInt[];
@@ -27,7 +27,12 @@ const EditLinks: React.FC<Props> = ({ data, classType }) => {
             ) : (
               <>
                 {name}
-                <span onClick={() => selectItem(link.id, classType)}>Edit</span>
+                <span
+                  className='pencil'
+                  onClick={() => selectItem(link.id, classType)}
+                >
+                  <Pencil />
+                </span>
               </>
             )}
           </div>

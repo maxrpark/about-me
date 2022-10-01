@@ -28,6 +28,8 @@ const LinkWrapper = styled.div`
     transition: var(--transition-1);
     box-shadow: var(--box-shadow-1);
     background: ${(props) => props.theme.buttonColor};
+    position: relative;
+    padding: 20px;
   }
 
   .social-container {
@@ -59,7 +61,21 @@ const LinkWrapper = styled.div`
     box-shadow: var(--box-shadow-1);
     background: ${(props) => props.theme.buttonColor};
     color: ${(props) => props.theme.textColor};
-    fill: ${(props) => props.theme.textColor};
+  }
+  .pencil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    right: 8px;
+    border-radius: 50%;
+    background: white;
+    background: var(--dark-primary-light);
+  }
+  .pencil svg {
+    fill: ${(props) => props.theme.textColorSecondary};
   }
 `;
 

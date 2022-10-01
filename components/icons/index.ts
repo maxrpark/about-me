@@ -1,6 +1,8 @@
 import TwitterFill from "./TwitterFill";
 import InstagramFill from "./InstagramFill";
 import GithubFill from "./GithubFill";
+import HomeIcon from "./Home";
+import Pencil from "./Pencil";
 
 export enum Icon {
   TWITTER = "twitter",
@@ -31,3 +33,5 @@ export const AvailableIcons = [
     name: Icon.GITHUB,
   },
 ];
+
+export { HomeIcon, Pencil };

@@ -29,12 +29,14 @@ const Home: NextPage<Props> = ({ linksData, themesData }) => {
     <Wrapper>
       <figure className='user-image'>
         <Link href={"/admin"}>
-          <Image
-            src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
-            width={100}
-            height={100}
-            alt={"user-img"}
-          />
+          <a>
+            <Image
+              src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
+              width={100}
+              height={100}
+              alt={"user-img"}
+            />
+          </a>
         </Link>
       </figure>
       <LinkWrapper className='layout'>

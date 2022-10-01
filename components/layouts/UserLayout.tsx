@@ -2,6 +2,7 @@ import { ReactElement, FC } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { signOut } from "next-auth/react";
+import { HomeIcon } from "../icons";
 
 import React from "react";
 import { useUserThemeContext } from "../../context/userThemeContext";
@@ -21,7 +22,11 @@ const UserLayout: FC<Props> = ({ children }) => {
   return (
     <Wrapper>
       <nav>
-        <Link href={"/"}>Home</Link>
+        <Link href={"/"}>
+          <a>
+            <HomeIcon />
+          </a>
+        </Link>
         ||
         <button onClick={() => signOut()}>Sign out</button>;
         <div onClick={toggleSidebar}>Change Theme</div>
