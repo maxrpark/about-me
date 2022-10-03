@@ -154,7 +154,15 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
       data: state.profileData,
       fileName: "db_about_me",
     };
-    await fetch("/api/db", { method: "POST", body: JSON.stringify(body) });
+    try {
+      await fetch("/api/db", {
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     dispatch({
       type: ActionType.UPDATE_DATA_END,
     });

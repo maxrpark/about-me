@@ -96,7 +96,15 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
       data: { theme: state.theme, layout: state.layout },
       fileName: "db_themes_options",
     };
-    await fetch("/api/db", { method: "POST", body: JSON.stringify(body) });
+    try {
+      await fetch("/api/db", {
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     dispatch({
       type: ActionType.UPDATE_DATA_END,
     });
