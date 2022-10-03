@@ -77,4 +77,11 @@ svg{
   overflow: hidden;
   margin: 0 auto;
 }
+main{
+padding: .5rem;
+display: flex;
+flex-direction: column;
+gap: 3rem;
+position: relative;
+}
 `;

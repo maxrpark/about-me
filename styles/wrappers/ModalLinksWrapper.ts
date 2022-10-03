@@ -31,6 +31,8 @@ const ModalLinksWrapper = styled.div`
 
   .editing-link {
     margin-top: 3rem;
+    width: 100%;
+    min-height: 50px;
   }
 
   form {

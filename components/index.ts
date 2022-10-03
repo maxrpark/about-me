@@ -7,5 +7,14 @@ import LinksModal from "./admin/Links/LinksModal";
 import SingleLink from "./SingleLink";
 
 import MyLinks from "./home/MyLinks";
+import UserLayout from "./layouts/UserLayout";
 
-export { FormRow, SelectRow, LinksModal, MyLinks, EditLinks, SingleLink };
+export {
+  FormRow,
+  SelectRow,
+  LinksModal,
+  MyLinks,
+  EditLinks,
+  SingleLink,
+  UserLayout,
+};

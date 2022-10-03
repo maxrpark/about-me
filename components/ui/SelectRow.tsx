@@ -26,6 +26,9 @@ const SelectRow: React.FC<Props> = ({
         id={formName}
         onChange={handleChange}
       >
+        {!selectedLink.name && (
+          <option value=''>--Please choose an option--</option>
+        )}
         {options.map((icon: any) => {
           return (
             <option value={icon.name} key={icon.id}>

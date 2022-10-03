@@ -2,6 +2,7 @@ import { FormRow, SelectRow } from "../..";
 import { useGlobalContext } from "../../../context/globalContext";
 import { ModalLinksWrapper } from "../../../styles/wrappers";
 import { CloseIcon } from "../../icons";
+import SingleLink from "../../SingleLink";
 const LinksModal: React.FC = () => {
   const {
     linkType,
@@ -12,13 +13,16 @@ const LinksModal: React.FC = () => {
     deleteItem,
     closeModal,
   } = useGlobalContext();
+
   return (
     <ModalLinksWrapper>
       <div className='modal'>
         <div className='close-icon' onClick={closeModal}>
           <CloseIcon />
         </div>
-        <div className='editing-link links-btn'>{selectedLink.name}</div>
+        <div className='editing-link'>
+          <SingleLink classType={linkType} name={selectedLink.name} />
+        </div>
         <form>
           {linkType === "social" ? (
             <SelectRow

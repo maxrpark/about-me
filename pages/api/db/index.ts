@@ -3,8 +3,6 @@ const fs = require("fs");
 import { getToken } from "next-auth/jwt";
 
 const handler: NextApiHandler = async (req, res) => {
-  //...
-
   const token = await getToken({ req });
   if (!token || token.email !== process.env.ADMINISTRATOR) {
     return res.status(401).json({ msg: "Unauthorized to visit this route" });

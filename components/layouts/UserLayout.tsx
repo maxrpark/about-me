@@ -57,10 +57,14 @@ const UserLayout: FC<Props> = ({ children }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   height: 100vh;
   position: relative;
   overflow: hidden;
+  nav {
+    position: absolute;
+    z-index: 1;
+  }
   .sidebar {
     height: 100vh;
     width: 100%;

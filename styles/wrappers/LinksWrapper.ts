@@ -4,8 +4,11 @@ const LinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 0.5rem;
   position: relative;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100%;
+  margin-top: 70px;
 
   .links-container {
     width: 100%;

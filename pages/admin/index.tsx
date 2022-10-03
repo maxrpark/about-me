@@ -1,18 +1,13 @@
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import type { NextPage } from "next";
-
-import { useEffect } from "react";
+import Image from "next/image";
 
 import { useGlobalContext, useUserThemeContext } from "../../context";
 import { ProfileDataInt, ThemeDataInt } from "../../ts/interfaces";
-
-import { LinksModal, EditLinks } from "../../components";
-import UserLayout from "../../components/layouts/UserLayout";
+import { LinksModal, EditLinks, UserLayout } from "../../components";
 import { LinkWrapper } from "../../styles/wrappers";
-
 import getData from "../../utils/getData";
-
-import Image from "next/image";
 
 interface Props {
   linksData: ProfileDataInt;

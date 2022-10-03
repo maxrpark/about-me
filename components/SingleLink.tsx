@@ -12,7 +12,7 @@ const SingleLink: React.FC<Props> = ({ classType, name }) => {
   }
   return (
     <div className={`${classType}-btn`}>
-      {classType === "social" ? <SocialIcon /> : name}
+      {classType === "social" && name ? <SocialIcon /> : name}
     </div>
   );
 };
