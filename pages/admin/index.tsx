@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import type { NextPage } from "next";
 import Image from "next/image";
 
@@ -44,7 +44,7 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async () => {
   const linksData: ProfileDataInt = await getData("db/db_about_me.json");
   const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
 
