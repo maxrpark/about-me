@@ -1,5 +1,4 @@
 import { icons, IconType } from "./icons";
-
 interface Props {
   classType?: string;
   name: string;
