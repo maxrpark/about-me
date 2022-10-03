@@ -62,7 +62,6 @@ const ModalLinksWrapper = styled.div`
     border: none;
     margin: 0 auto;
     /* confirm */
-
     background: #59ffa0; /*todo change color*/
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25); /*todo  variable*/
     border-radius: 5px;
