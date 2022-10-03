@@ -23,7 +23,7 @@ const ModalLinksWrapper = styled.div`
     align-items: center;
     padding: 8px 16px 16px;
     width: 90%;
-    background: #ffffff; /*todo  variable*/
+    background: var(--color-white-1);
     box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.25); /*todo  variable*/
     border-radius: 5px;
     background: ${(props) => props.theme.bgColor};
@@ -70,7 +70,7 @@ const ModalLinksWrapper = styled.div`
   .delete {
     background: #d64045;
     width: 120px;
-    color: white; /*todo change color*/
+    color: var(--color-white-1);
   }
 
   .close-icon {

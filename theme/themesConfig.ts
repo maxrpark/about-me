@@ -25,29 +25,29 @@ export const GlobalStyle = createGlobalStyle`
 
   /* theme colors */
 
-  /* default */
-  --default-primary: #E3F2FD;
-  --default-primary-light: #FFFFFF;
-  --default-primary-dark: #85929C;
+  /* theme-one (default) */ 
+  --theme-one-primary: #E3F2FD;
+  --theme-one-primary-light: #FFFFFF;
+  --theme-one-primary-dark: #85929C;
 
-  /* dark */
-  --dark-primary: #484848;
-  --dark-primary-light: #FFFFFFCC;
-  --dark-primary-dark: #212121;
+  /* theme-two */   /* (Black) */
+  --theme-two-primary: #484848;
+  --theme-two-primary-light: #FFFFFFCC;
+  --theme-two-primary-dark: #212121;
 
-  /* pink */
-  --pink-primary: #FFEBEE;
-  --pink-primary-light: #FFFBFF;
-  --pink-primary-dark: #AF8EB5;
+  /* theme-three */   /* (pink) */
+  --theme-three-primary: #FFEBEE;
+  --theme-three-primary-light: #FFFBFF;
+  --theme-three-primary-dark: #AF8EB5;
 
-  /* light */
-  --light-primary: #E8F5E9;
-  --light-primary-light: #FBFBFB;
-  --light-primary-dark: #484848;
+  /* theme-four */   /* (light) */
+  --theme-four-primary: #E8F5E9;
+  --theme-four-primary-light: #FBFBFB;
+  --theme-four-primary-dark: #484848;
 
 
   /*  */
-  --color-white-1: #fff;
+  --color-white-1: #ffffff;
   --color-black-1: #1d1d1d;
 
   --box-shadow-1: rgba(0, 0, 0, 0.1) 0px 4px 12px;

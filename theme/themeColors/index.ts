@@ -1,31 +1,31 @@
 import { DefaultTheme } from "styled-components";
 
 const defaultTheme: DefaultTheme = {
-  bgColor: "var(--default-primary-light)",
-  textColor: "var(--default-primary-dark)",
-  buttonColor: "var(--default-primary)",
-  textColorSecondary: "var(--default-primary-dark)",
+  bgColor: "var(--theme-one-primary-light)",
+  textColor: "var(--theme-one-primary-dark)",
+  buttonColor: "var(--theme-one-primary)",
+  textColorSecondary: "var(--theme-one-primary-dark)",
 };
 
 const darkTheme: DefaultTheme = {
-  bgColor: "var(--dark-primary)",
-  textColor: "var(--dark-primary-light)",
-  buttonColor: "var(--dark-primary-dark)",
-  textColorSecondary: "var(--dark-primary-dark)",
+  bgColor: "var(--theme-two-primary)",
+  textColor: "var(--theme-two-primary-light)",
+  buttonColor: "var(--theme-two-primary-dark)",
+  textColorSecondary: "var(--theme-two-primary-dark)",
 };
 
 const pinkTheme: DefaultTheme = {
-  bgColor: "var(--pink-primary-light)",
-  textColor: "var(--pink-primary-dark)",
-  buttonColor: "var(--pink-primary)",
-  textColorSecondary: "var(--pink-primary-dark)",
+  bgColor: "var(--theme-three-primary-light)",
+  textColor: "var(--theme-three-primary-dark)",
+  buttonColor: "var(--theme-three-primary)",
+  textColorSecondary: "var(--theme-three-primary-dark)",
 };
 
 const lightTheme: DefaultTheme = {
-  bgColor: "var(--light-primary-light)",
-  textColor: "var(--light-primary-dark)",
-  buttonColor: "var(--light-primary)",
-  textColorSecondary: "var(--light-primary-dark)",
+  bgColor: "var(--theme-four-primary-light)",
+  textColor: "var(--theme-four-primary-dark)",
+  buttonColor: "var(--theme-four-primary)",
+  textColorSecondary: "var(--theme-four-primary-dark)",
 };
 
 export const themesList: any = {

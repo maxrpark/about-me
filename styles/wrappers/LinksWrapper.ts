@@ -73,7 +73,7 @@ const LinkWrapper = styled.div`
     right: 8px;
     border-radius: 50%;
     background: white;
-    background: var(--dark-primary-light);
+    background: var(--theme-two-primary-light);
   }
   .pencil svg {
     fill: ${(props) => props.theme.textColorSecondary};
