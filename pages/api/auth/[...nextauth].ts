@@ -13,7 +13,7 @@ export default NextAuth({
       if (user.email === process.env.ADMINISTRATOR!) {
         return true;
       } else {
-        return "/create-project";
+        return false;
       }
     },
     async session({ session }) {
