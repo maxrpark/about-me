@@ -1,5 +1,5 @@
 import { LinkItemInt } from "../../ts/interfaces";
-import { icons, IconType } from "../icons";
+import { SingleLink } from "../";
 
 interface Props {
   data: LinkItemInt[];
@@ -10,21 +10,10 @@ const MyLinks: React.FC<Props> = ({ data, classType }) => {
   return (
     <div className={`${classType}-container`}>
       {data.map((link: LinkItemInt) => {
-        const { name } = link;
-
-        let SocialIcon: any;
-        if (classType === "social") {
-          SocialIcon = icons[name as IconType];
-        }
+        const { name, id, url } = link;
         return (
-          <a
-            className={`${classType}-btn`}
-            target={"_blank"}
-            key={link.id}
-            href={link.url}
-            rel='noreferrer'
-          >
-            {classType === "social" ? <SocialIcon /> : name}
+          <a target={"_blank"} key={id} href={url} rel='noreferrer'>
+            <SingleLink classType={classType} name={name} />
           </a>
         );
       })}

@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ linksData, themesData }) => {
   }, []);
 
   return (
-    <Wrapper>
+    <div>
       <figure className='user-image'>
         <Link href={"/admin"}>
           <a>
@@ -43,7 +43,7 @@ const Home: NextPage<Props> = ({ linksData, themesData }) => {
         <MyLinks data={links} classType={"links"} />
         <MyLinks data={social} classType={"social"} />
       </LinkWrapper>
-    </Wrapper>
+    </div>
   );
 };
 
@@ -69,18 +69,5 @@ export const getStaticProps: GetStaticProps = async () => {
 //     },
 //   };
 // };
-
-const Wrapper = styled.section`
-  .user-image {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-`;
 
 export default Home;

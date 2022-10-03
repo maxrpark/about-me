@@ -1,6 +1,7 @@
 import { useGlobalContext } from "../../../context/globalContext";
 import { LinkItemInt } from "../../../ts/interfaces";
-import { icons, IconType, Pencil } from "../../icons";
+import { Pencil } from "../../icons";
+import { SingleLink } from "../../";
 
 interface Props {
   data: LinkItemInt[];
@@ -12,22 +13,18 @@ const EditLinks: React.FC<Props> = ({ data, classType }) => {
   return (
     <div className={`${classType}-container`}>
       {data.map((link: LinkItemInt) => {
-        const { name } = link;
-        let SocialIcon: any;
-        if (classType === "social") {
-          SocialIcon = icons[name as IconType];
-        }
+        const { id, name } = link;
         return (
           <div
-            onClick={() => selectItem(link.id, classType)}
+            onClick={() => selectItem(id, classType)}
             className={`${classType}-btn`}
-            key={link.id}
+            key={id}
           >
             {classType === "social" ? (
-              <SocialIcon key={link.id} />
+              <SingleLink classType='social' name={name} />
             ) : (
               <>
-                {name}
+                <SingleLink name={name} />
                 <span className='pencil'>
                   <Pencil />
                 </span>

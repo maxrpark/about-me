@@ -17,6 +17,9 @@ const LinkWrapper = styled.div`
     gap: 1rem;
     margin: 0 auto;
   }
+  .links-container a {
+    width: 100%;
+  }
 
   .links-btn,
   .links-add {
@@ -31,6 +34,7 @@ const LinkWrapper = styled.div`
     background: ${(props) => props.theme.buttonColor};
     position: relative;
     padding: 20px;
+    width: 100%;
   }
 
   .social-container {

@@ -12,6 +12,8 @@ import { LinkWrapper } from "../../styles/wrappers";
 
 import getData from "../../utils/getData";
 
+import Image from "next/image";
+
 interface Props {
   linksData: ProfileDataInt;
   themesData: any;
@@ -31,6 +33,14 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
   return (
     <UserLayout>
       <LinkWrapper className='layout'>
+        <figure className='user-image'>
+          <Image
+            src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
+            width={100}
+            height={100}
+            alt={"user-img"}
+          />
+        </figure>
         <EditLinks data={profileData.links} classType={"links"} />
         <EditLinks data={profileData.social} classType={"social"} />
         {showModal && <LinksModal />}

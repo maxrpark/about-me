@@ -19,12 +19,6 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 :root {
-
-
-
-
-  /* theme colors */
-
   /* theme-one (default) */ 
   --theme-one-primary: #E3F2FD;
   --theme-one-primary-light: #FFFFFF;
@@ -71,5 +65,16 @@ ${minimalistLayout}
 
 svg{
  fill: ${(props) => props.theme.textColor};;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
 }
 `;
