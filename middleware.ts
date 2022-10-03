@@ -6,6 +6,7 @@ export default withAuth(
   function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith("/admin")) {
       // This logic is only applied to /admin
+      console.log("hello");
     }
   },
   {
