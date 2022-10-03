@@ -13,49 +13,51 @@ const LinksModal: React.FC = () => {
     closeModal,
   } = useGlobalContext();
   return (
-    <ModalLinksWrapper className='modal'>
-      <div className='close-icon' onClick={closeModal}>
-        <CloseIcon />
-      </div>
-      <div className='editing-link links-btn'>{selectedLink.name}</div>
-      <form>
-        {linkType === "social" ? (
-          <SelectRow
-            name={"name"}
-            formName={"selectedLink"}
-            handleChange={handleInputChange}
-            options={availableIcons}
-          />
-        ) : (
+    <ModalLinksWrapper>
+      <div className='modal'>
+        <div className='close-icon' onClick={closeModal}>
+          <CloseIcon />
+        </div>
+        <div className='editing-link links-btn'>{selectedLink.name}</div>
+        <form>
+          {linkType === "social" ? (
+            <SelectRow
+              name={"name"}
+              formName={"selectedLink"}
+              handleChange={handleInputChange}
+              options={availableIcons}
+            />
+          ) : (
+            <FormRow
+              name='name'
+              type='text'
+              formName='selectedLink'
+              value={selectedLink.name}
+              handleChange={handleInputChange}
+            />
+          )}
           <FormRow
-            name='name'
+            name='url'
             type='text'
             formName='selectedLink'
-            value={selectedLink.name}
+            value={selectedLink.url}
             handleChange={handleInputChange}
           />
-        )}
-        <FormRow
-          name='url'
-          type='text'
-          formName='selectedLink'
-          value={selectedLink.url}
-          handleChange={handleInputChange}
-        />
 
-        <button
-          type='submit'
-          className='btn confirm'
-          onClick={handleFormSubmit}
+          <button
+            type='submit'
+            className='btn confirm'
+            onClick={handleFormSubmit}
+          >
+            Confirm
+          </button>
+        </form>
+        <div
+          className='btn delete'
+          onClick={() => deleteItem(selectedLink.id, linkType)}
         >
-          Confirm
-        </button>
-      </form>
-      <div
-        className='btn delete'
-        onClick={() => deleteItem(selectedLink.id, linkType)}
-      >
-        Deleted
+          Deleted
+        </div>
       </div>
     </ModalLinksWrapper>
   );

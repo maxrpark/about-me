@@ -1,22 +1,33 @@
 import styled from "styled-components";
 
 const ModalLinksWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 8px 16px 16px;
-  width: 90%;
-  max-width: 500px;
-  height: 375px;
-  background: #ffffff; /*todo  variable*/
-  box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.25); /*todo  variable*/
-  border-radius: 5px;
-  margin: 0 auto;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: rgba(33, 33, 33, 0.8);
+
+  .modal {
+    max-width: 500px;
+    height: 375px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px 16px;
+    width: 90%;
+    background: #ffffff; /*todo  variable*/
+    box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.25); /*todo  variable*/
+    border-radius: 5px;
+    background: ${(props) => props.theme.bgColor};
+  }
 
   .editing-link {
     margin-top: 3rem;
