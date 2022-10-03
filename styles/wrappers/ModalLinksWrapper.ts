@@ -57,7 +57,6 @@ const ModalLinksWrapper = styled.div`
     align-items: center;
     padding: 10px 8px;
     gap: 8px;
-
     width: 100%;
     height: 36px;
     border: none;
