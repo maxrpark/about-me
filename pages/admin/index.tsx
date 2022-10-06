@@ -7,9 +7,10 @@ import { useGlobalContext, useUserThemeContext } from "../../context";
 import { LinkItemInt, ThemeDataInt } from "../../ts/interfaces";
 import { LinksModal, EditLinks, UserLayout } from "../../components";
 import { LinkWrapper } from "../../styles/wrappers";
-import getData from "../../utils/getData";
+
 import UserLink from "../../db/model/Links";
 import { db } from "../../db/connectDB";
+import ThemeConfig from "../../db/model/Theme";
 
 interface Props {
   links: LinkItemInt[];
@@ -49,11 +50,13 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
   );
 };
 
+// TODO change to getServerSideProps
 export const getStaticProps: GetStaticProps = async () => {
-  const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
+  let data = { theme: "default", layout: "default" };
 
   await db.connect();
   const linksData = await UserLink.find({});
+  const themeConfig = await ThemeConfig.find({});
   await db.disconnect();
 
   const links = linksData.filter((item: LinkItemInt) => item.type === "links");
@@ -65,7 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       links: JSON.parse(JSON.stringify(links)),
       social: JSON.parse(JSON.stringify(social)),
-      themesData,
+      themesData: themeConfig[0] ? themeConfig[0] : data,
     },
     revalidate: 10, // In seconds
   };

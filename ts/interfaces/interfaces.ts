@@ -16,8 +16,8 @@ export interface ProfileDataInt {
   social: LinkItemInt[];
 }
 
-interface ThemeItem {
-  id: string;
+export interface ThemeItem {
+  _id: string;
   name: string;
 }
 

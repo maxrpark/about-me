@@ -1,3 +1,9 @@
-import { User, LinkItemInt, ProfileDataInt, ThemeDataInt } from "./interfaces";
+import {
+  User,
+  LinkItemInt,
+  ProfileDataInt,
+  ThemeDataInt,
+  ThemeItem,
+} from "./interfaces";
 
-export type { User, LinkItemInt, ProfileDataInt, ThemeDataInt };
+export type { User, LinkItemInt, ProfileDataInt, ThemeDataInt, ThemeItem };
