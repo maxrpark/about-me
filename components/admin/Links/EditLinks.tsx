@@ -13,12 +13,12 @@ const EditLinks: React.FC<Props> = ({ data, classType }) => {
   return (
     <div className={`${classType}-container`}>
       {data.map((link: LinkItemInt) => {
-        const { id, name } = link;
+        const { _id, name } = link;
         return (
           <div
-            onClick={() => selectItem(id, classType)}
+            onClick={() => selectItem(_id, classType)}
             className={`${classType}-btn`}
-            key={id}
+            key={_id}
           >
             {classType === "social" ? (
               <SingleLink classType='social' name={name} />

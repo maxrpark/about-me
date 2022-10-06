@@ -4,20 +4,27 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import { useGlobalContext, useUserThemeContext } from "../../context";
-import { ProfileDataInt, ThemeDataInt } from "../../ts/interfaces";
+import { LinkItemInt, ThemeDataInt } from "../../ts/interfaces";
 import { LinksModal, EditLinks, UserLayout } from "../../components";
 import { LinkWrapper } from "../../styles/wrappers";
 import getData from "../../utils/getData";
+import UserLink from "../../db/model/Links";
+import { db } from "../../db/connectDB";
 
 interface Props {
-  linksData: ProfileDataInt;
+  links: LinkItemInt[];
+  social: LinkItemInt[];
   themesData: any;
 }
 
-const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
+const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
   const { profileData, showModal, setData } = useGlobalContext();
   const { setThemeData } = useUserThemeContext();
 
+  let linksData = {
+    links,
+    social,
+  };
   useEffect(() => {
     setData(linksData);
     setThemeData(themesData);
@@ -36,8 +43,8 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
             alt={"user-img"}
           />
         </figure>
-        <EditLinks data={profileData.links} classType={"links"} />
-        <EditLinks data={profileData.social} classType={"social"} />
+        <EditLinks data={links} classType={"links"} />
+        <EditLinks data={social} classType={"social"} />
         {showModal && <LinksModal />}
       </LinkWrapper>
     </UserLayout>
@@ -45,14 +52,24 @@ const ChangePage: NextPage<Props> = ({ linksData, themesData }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const linksData: ProfileDataInt = await getData("db/db_about_me.json");
   const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
+
+  await db.connect();
+  const linksData = await UserLink.find({});
+  await db.disconnect();
+
+  const links = linksData.filter((item: LinkItemInt) => item.type === "links");
+  const social = linksData.filter(
+    (item: LinkItemInt) => item.type === "social"
+  );
 
   return {
     props: {
-      linksData,
+      links: JSON.parse(JSON.stringify(links)),
+      social: JSON.parse(JSON.stringify(social)),
       themesData,
     },
+    revalidate: 10, // In seconds
   };
 };
 
