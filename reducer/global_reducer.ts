@@ -33,7 +33,7 @@ const global_reducer = (
 
     case ActionType.SELECT_ITEM:
       let selected = state.profileData[state.linkType].find(
-        (item: LinkItemInt) => item.id === action.payload
+        (item: LinkItemInt) => item._id === action.payload
       );
 
       return {
@@ -58,16 +58,14 @@ const global_reducer = (
       };
 
     case ActionType.ADD_ITEM:
-      const newLink = {
-        ...state.selectedLink,
-        id: action.payload,
-      };
-
       return {
         ...state,
         profileData: {
           ...state.profileData,
-          [state.linkType]: [...state.profileData[state.linkType], newLink],
+          [state.linkType]: [
+            ...state.profileData[state.linkType],
+            action.payload,
+          ],
         },
         isEditing: false,
         updateData: true,
@@ -75,8 +73,8 @@ const global_reducer = (
     case ActionType.EDIT_ITEM:
       let tempList = state.profileData[state.linkType].map(
         (item: LinkItemInt) => {
-          if (item.id === state.selectedLink.id) {
-            return state.selectedLink;
+          if (item._id === state.selectedLink._id) {
+            return action.payload;
           }
           return item;
         }
@@ -95,7 +93,7 @@ const global_reducer = (
     case ActionType.DELETE_ITEM:
       const { profileData } = state;
       profileData[state.linkType] = state.profileData[state.linkType].filter(
-        (item: LinkItemInt) => item.id !== action.payload
+        (item: LinkItemInt) => item._id !== action.payload
       );
 
       return {

@@ -21,10 +21,8 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
   const { profileData, showModal, setData } = useGlobalContext();
   const { setThemeData } = useUserThemeContext();
 
-  let linksData = {
-    links,
-    social,
-  };
+  let linksData = { links, social };
+
   useEffect(() => {
     setData(linksData);
     setThemeData(themesData);
@@ -43,8 +41,8 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
             alt={"user-img"}
           />
         </figure>
-        <EditLinks data={links} classType={"links"} />
-        <EditLinks data={social} classType={"social"} />
+        <EditLinks data={profileData.links} />
+        <EditLinks data={profileData.social} />
         {showModal && <LinksModal />}
       </LinkWrapper>
     </UserLayout>

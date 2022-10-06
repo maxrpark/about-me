@@ -3,10 +3,10 @@ import { SingleLink } from "../";
 
 interface Props {
   data: LinkItemInt[];
-  classType: string;
 }
 
-const MyLinks: React.FC<Props> = ({ data, classType }) => {
+const MyLinks: React.FC<Props> = ({ data }) => {
+  let classType = data[0].type!;
   return (
     <div className={`${classType}-container`}>
       {data.map((link: LinkItemInt) => {

@@ -92,23 +92,22 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
   }, [state.layout]);
 
   const saveChanges = async () => {
-    const body = {
-      data: { theme: state.theme, layout: state.layout },
-      fileName: "db_themes_options",
-    };
-    try {
-      await fetch("/api/db", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    dispatch({
-      type: ActionType.UPDATE_DATA_END,
-    });
-    console.log("end");
+    // const body = {
+    //   data: { theme: state.theme, layout: state.layout },
+    //   fileName: "db_themes_options",
+    // };
+    // try {
+    //   await fetch("/api/db", {
+    //     method: "POST",
+    //     body: JSON.stringify(body),
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // dispatch({
+    //   type: ActionType.UPDATE_DATA_END,
+    // });
+    // console.log("end");
   };
 
   useEffect(() => {

@@ -58,7 +58,7 @@ const LinksModal: React.FC = () => {
         </form>
         <div
           className='btn delete'
-          onClick={() => deleteItem(selectedLink.id, linkType)}
+          onClick={() => deleteItem(selectedLink._id, linkType)}
         >
           Deleted
         </div>

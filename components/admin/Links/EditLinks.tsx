@@ -5,10 +5,11 @@ import { SingleLink } from "../../";
 
 interface Props {
   data: LinkItemInt[];
-  classType: string;
 }
 
-const EditLinks: React.FC<Props> = ({ data, classType }) => {
+const EditLinks: React.FC<Props> = ({ data }) => {
+  let classType = data[0].type!;
+
   const { selectItem, selectOrCreateItem } = useGlobalContext();
   return (
     <div className={`${classType}-container`}>

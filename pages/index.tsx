@@ -8,7 +8,7 @@ import getData from "../utils/getData";
 
 import { LinkWrapper } from "../styles/wrappers";
 import { MyLinks } from "../components";
-import { ProfileDataInt, LinkItemInt, ThemeDataInt } from "../ts/interfaces";
+import { LinkItemInt, ThemeDataInt } from "../ts/interfaces";
 import { useUserThemeContext } from "../context";
 import { db } from "../db/connectDB";
 import UserLink from "../db/model/Links";
@@ -20,9 +20,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ links, social, themesData }) => {
-  // const { links, social } = linksData;
   const { setThemeData } = useUserThemeContext();
-  console.log(social);
 
   useEffect(() => {
     setThemeData(themesData);
@@ -43,15 +41,14 @@ const Home: NextPage<Props> = ({ links, social, themesData }) => {
             </a>
           </Link>
         </figure>
-        <MyLinks data={links} classType={"links"} />
-        <MyLinks data={social} classType={"social"} />
+        <MyLinks data={links} />
+        <MyLinks data={social} />
       </LinkWrapper>
     </main>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const linksData: LinkItemInt = await getData("db/db_about_me.json");
   const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
 
   await db.connect();

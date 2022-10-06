@@ -11,7 +11,7 @@ const handler: NextApiHandler = async (req, res) => {
       return createLink(req, res);
 
     case "DELETE":
-      await await db.connect();
+      await db.connect();
       await UserLink.deleteMany({});
       await db.disconnect();
       return res.status(200).json("All clear");

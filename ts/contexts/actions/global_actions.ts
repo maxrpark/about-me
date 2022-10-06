@@ -31,12 +31,12 @@ interface HANDLE_FORM_INPUT {
 }
 interface EDIT_ITEM {
   type: ActionType.EDIT_ITEM;
-  payload: LinkItemInt;
+  payload: any; // TODO
 }
 
 interface ADD_ITEM {
   type: ActionType.ADD_ITEM;
-  payload: string;
+  payload: any; // TODO
 }
 interface TOGGLE_MODAL {
   type: ActionType.TOGGLE_MODAL;

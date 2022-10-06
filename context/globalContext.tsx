@@ -2,9 +2,9 @@ import React, { useReducer, useContext, useEffect } from "react";
 import global_reducer from "../reducer/global_reducer";
 import { ActionType } from "../ts/contexts/actions-types";
 import { GlobalInitialState } from "../ts/contexts/initialStates";
-import { v4 as uuidv4 } from "uuid";
 import { LinkItemInt, ProfileDataInt } from "../ts/interfaces";
 import { AvailableIcons } from "../components/icons";
+import axios from "axios";
 
 type Props = {
   children: React.ReactNode;
@@ -86,7 +86,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   };
 
   const selectOrCreateItem = (linkType: string) => {
-    // Change Name
+    // TODO Change Name EDITORCREATE
     dispatch({
       type: ActionType.TOGGLE_MODAL,
     });
@@ -97,18 +97,31 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   };
 
   // FORM SUBMIT
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (state.selectedLink.name && state.selectedLink.name.trim() !== "") {
       if (state.isEditing) {
+        let body = {
+          ...state.selectedLink,
+        };
+        let res = await axios.patch(
+          `/api/links/${state.selectedLink._id}`,
+          body
+        );
+
         dispatch({
           type: ActionType.EDIT_ITEM,
-          payload: state.selectedLink,
+          payload: res.data,
         });
       } else {
+        let body = {
+          ...state.selectedLink,
+          type: state.linkType,
+        };
+        let res = await axios.post("/api/links", body);
         dispatch({
           type: ActionType.ADD_ITEM,
-          payload: uuidv4(),
+          payload: res.data,
         });
       }
 
@@ -120,7 +133,12 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
-  const deleteItem = (id: string) => {
+  const deleteItem = async (id: string) => {
+    try {
+      await axios.delete(`/api/links/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
     dispatch({
       type: ActionType.DELETE_ITEM,
       payload: id,
@@ -150,27 +168,26 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   };
 
   const saveThemeChanges = async () => {
-    const body = {
-      data: state.profileData,
-      fileName: "db_about_me",
-    };
-    try {
-      await fetch("/api/db", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    dispatch({
-      type: ActionType.UPDATE_DATA_END,
-    });
+    // const body = {
+    //   data: state.profileData,
+    //   fileName: "db_about_me",
+    // };
+    // try {
+    //   await fetch("/api/db", {
+    //     method: "POST",
+    //     body: JSON.stringify(body),
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // dispatch({
+    //   type: ActionType.UPDATE_DATA_END,
+    // });
   };
 
   useEffect(() => {
     if (state.updateData) {
-      saveThemeChanges();
+      // saveThemeChanges();
     }
   }, [state.profileData.links, state.profileData.social]);
 
