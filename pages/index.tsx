@@ -10,15 +10,19 @@ import { LinkWrapper } from "../styles/wrappers";
 import { MyLinks } from "../components";
 import { ProfileDataInt, LinkItemInt, ThemeDataInt } from "../ts/interfaces";
 import { useUserThemeContext } from "../context";
+import { db } from "../db/connectDB";
+import UserLink from "../db/model/Links";
 
 interface Props {
-  linksData: ProfileDataInt;
+  links: LinkItemInt[];
+  social: LinkItemInt[];
   themesData: any;
 }
 
-const Home: NextPage<Props> = ({ linksData, themesData }) => {
-  const { links, social } = linksData;
+const Home: NextPage<Props> = ({ links, social, themesData }) => {
+  // const { links, social } = linksData;
   const { setThemeData } = useUserThemeContext();
+  console.log(social);
 
   useEffect(() => {
     setThemeData(themesData);
@@ -47,12 +51,22 @@ const Home: NextPage<Props> = ({ linksData, themesData }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const linksData: LinkItemInt = await getData("db/db_about_me.json");
+  // const linksData: LinkItemInt = await getData("db/db_about_me.json");
   const themesData: ThemeDataInt = await getData("db/db_themes_options.json");
+
+  await db.connect();
+  const linksData = await UserLink.find({});
+  await db.disconnect();
+
+  const links = linksData.filter((item: LinkItemInt) => item.type === "links");
+  const social = linksData.filter(
+    (item: LinkItemInt) => item.type === "social"
+  );
 
   return {
     props: {
-      linksData,
+      links: JSON.parse(JSON.stringify(links)),
+      social: JSON.parse(JSON.stringify(social)),
       themesData,
     },
     revalidate: 10, // In seconds

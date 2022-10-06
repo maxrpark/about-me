@@ -5,7 +5,8 @@ export interface User {
   image: string;
 }
 export interface LinkItemInt {
-  id: string;
+  type?: string;
+  _id: string;
   name: string;
   url: string;
 }
