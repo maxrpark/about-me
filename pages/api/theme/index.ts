@@ -31,7 +31,6 @@ const updateTheme: NextApiHandler = async (req, res) => {
       req.body,
       { runValidators: true, new: true }
     );
-    console.log(link);
 
     await db.disconnect();
     return res.status(200).json(link);
