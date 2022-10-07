@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ import ThemeConfig from "../db/model/Theme";
 interface Props {
   links: LinkItemInt[];
   social: LinkItemInt[];
-  themesData: any;
+  themesData: ThemeDataInt;
 }
 
 const Home: NextPage<Props> = ({ links, social, themesData }) => {
@@ -47,15 +47,14 @@ const Home: NextPage<Props> = ({ links, social, themesData }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  let data = { theme: "default", layout: "default" };
-  let themesData = {};
+export const getServerSideProps: GetServerSideProps = async () => {
+  let themesData: ThemeDataInt = { theme: "default", layout: "default" };
 
   await db.connect();
   const linksData = await UserLink.find({});
-  let themeConfig = await ThemeConfig.find({});
-  if (themeConfig.length === 0) {
-    await ThemeConfig.create(data);
+  let themeConfig: ThemeDataInt[] | null = await ThemeConfig.find({});
+  if (themeConfig && themeConfig.length === 0) {
+    await ThemeConfig.create(themesData);
   } else {
     themesData = JSON.parse(JSON.stringify(themeConfig[0]));
   }
@@ -73,7 +72,6 @@ export const getStaticProps: GetStaticProps = async () => {
       social: JSON.parse(JSON.stringify(social)),
       themesData,
     },
-    revalidate: 1, // In seconds
   };
 };
 

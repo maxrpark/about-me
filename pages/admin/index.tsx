@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GetStaticProps, GetServerSideProps } from "next";
+import { GetServerSideProps } from "next";
 import type { NextPage } from "next";
 import Image from "next/image";
 
@@ -53,13 +53,13 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let data = { theme: "default", layout: "default" };
-  let themesData = {};
+  let themesData: ThemeDataInt = { theme: "default", layout: "default" };
+
   await db.connect();
   const linksData = await UserLink.find({});
-  const themeConfig = await ThemeConfig.find({});
-  if (themeConfig.length === 0) {
-    await ThemeConfig.create(data);
+  let themeConfig: ThemeDataInt[] | null = await ThemeConfig.find({});
+  if (themeConfig && themeConfig.length === 0) {
+    await ThemeConfig.create(themesData);
   } else {
     themesData = JSON.parse(JSON.stringify(themeConfig[0]));
   }

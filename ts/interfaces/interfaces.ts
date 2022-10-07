@@ -24,6 +24,4 @@ export interface ThemeItem {
 export interface ThemeDataInt {
   theme: string;
   layout: string;
-  themeColor: ThemeItem[];
-  themesLayouts: ThemeItem[];
 }
