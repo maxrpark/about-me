@@ -39,13 +39,18 @@ const UserLayout: FC<Props> = ({ children }) => {
         <div className='content' onClick={(e) => e.stopPropagation()}>
           sidebar
           <div onClick={toggleSidebar}>close</div>
-          {themesColors.map((color: any) => {
-            return (
-              <h2 key={color.id} onClick={() => changeThemeColor(color.name)}>
-                {color.name}
-              </h2>
-            );
-          })}
+          <div className='theme-color'>
+            {themesColors.map((color: any) => {
+              return (
+                <div
+                  className='color-icon'
+                  style={{ background: color.color }}
+                  key={color.id}
+                  onClick={() => changeThemeColor(color.name)}
+                ></div>
+              );
+            })}
+          </div>
           <h2 style={{ margin: "2rem" }}>Layouts</h2>
           {themesLayouts.map((theme: any) => {
             return (
@@ -97,13 +102,24 @@ const Wrapper = styled.main`
     width: 40%;
     margin-left: auto;
     transition: 0.3s linear all;
-    background: blue;
+    background: ${(props) => props.theme.buttonColor};
     transform: translateX(100%);
   }
   .sidebar-open .content {
     animation: sideBarAnimation 0.3s 0.2s forwards;
   }
-
+  .theme-color {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem;
+  }
+  .color-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
   @keyframes sideBarAnimation {
     0% {
       transform: translateX(100%);

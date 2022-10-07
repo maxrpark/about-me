@@ -18,10 +18,10 @@ enum ThemeColor {
 }
 
 const themesColor = [
-  { id: 1, name: ThemeColor.DEFAULT },
-  { id: 2, name: ThemeColor.DARK },
-  { id: 3, name: ThemeColor.PINK },
-  { id: 4, name: ThemeColor.LIGHT },
+  { id: 1, name: ThemeColor.DEFAULT, color: "var(--theme-one-primary)" },
+  { id: 2, name: ThemeColor.DARK, color: "var(--theme-two-primary)" },
+  { id: 3, name: ThemeColor.PINK, color: "var(--theme-three-primary)" },
+  { id: 4, name: ThemeColor.LIGHT, color: "var(--theme-four-primary)" },
 ];
 
 const themesLayouts = [
