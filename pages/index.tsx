@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
       social: JSON.parse(JSON.stringify(social)),
       themesData,
     },
-    revalidate: 10, // In seconds
+    revalidate: 1, // In seconds
   };
 };
 
