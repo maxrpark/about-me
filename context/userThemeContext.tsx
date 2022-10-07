@@ -4,6 +4,7 @@ import { ActionType } from "../ts/contexts/actions-types";
 import { UserThemeInitialState } from "../ts/contexts/initialStates/index";
 import { ThemeProvider } from "styled-components";
 import { themesList } from "../theme";
+import axios from "axios";
 
 type Props = {
   children: React.ReactNode;
@@ -38,8 +39,9 @@ interface UserContext {
   updateData: boolean;
   setThemeData: (data: any) => void;
   toggleSidebar: () => void;
-  changeThemeColor: (themeName: string) => void;
-  changeThemeLayout: (layoutName: string) => void;
+  saveChanges: () => void;
+  changeThemeColor: (theme: string) => void;
+  changeThemeLayout: (layout: string) => void;
 }
 
 const InitialState: UserThemeInitialState = {
@@ -71,17 +73,17 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
-  const changeThemeColor = (themeName: string) => {
+  const changeThemeColor = async (theme: string) => {
     dispatch({
       type: ActionType.CHANGE_THEME_COLOR,
-      payload: themeName,
+      payload: theme,
     });
   };
 
-  const changeThemeLayout = (layoutName: string) => {
+  const changeThemeLayout = async (layout: string) => {
     dispatch({
       type: ActionType.CHANGE_THEME_LAYOUT,
-      payload: layoutName,
+      payload: layout,
     });
   };
 
@@ -92,30 +94,16 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
   }, [state.layout]);
 
   const saveChanges = async () => {
-    // const body = {
-    //   data: { theme: state.theme, layout: state.layout },
-    //   fileName: "db_themes_options",
-    // };
-    // try {
-    //   await fetch("/api/db", {
-    //     method: "POST",
-    //     body: JSON.stringify(body),
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // dispatch({
-    //   type: ActionType.UPDATE_DATA_END,
-    // });
-    // console.log("end");
-  };
-
-  useEffect(() => {
-    if (state.updateData) {
-      console.log("update");
-      saveChanges();
+    const { theme, layout } = state;
+    dispatch({
+      type: ActionType.TOGGLE_SIDEBAR,
+    });
+    try {
+      await axios.patch(`/api/theme/`, { theme, layout });
+    } catch (error) {
+      console.log(error);
     }
-  }, [state.theme, state.layout]);
+  };
 
   return (
     <UserThemeContext.Provider
@@ -125,6 +113,7 @@ export const UserThemeProvider: React.FC<Props> = ({ children }) => {
         changeThemeColor,
         changeThemeLayout,
         setThemeData,
+        saveChanges,
       }}
     >
       <ThemeProvider theme={themesList[state.theme]}>{children}</ThemeProvider>

@@ -17,6 +17,7 @@ const UserLayout: FC<Props> = ({ children }) => {
     toggleSidebar,
     changeThemeColor,
     changeThemeLayout,
+    saveChanges,
   } = useUserThemeContext();
 
   return (
@@ -31,8 +32,11 @@ const UserLayout: FC<Props> = ({ children }) => {
         <button onClick={() => signOut()}>Sign out</button>;
         <div onClick={toggleSidebar}>Change Theme</div>
       </nav>
-      <aside className={`${isSidebarOpen ? "sidebar-open" : ""} sidebar`}>
-        <div className='content'>
+      <aside
+        onClick={saveChanges}
+        className={`${isSidebarOpen ? "sidebar-open" : ""} sidebar`}
+      >
+        <div className='content' onClick={(e) => e.stopPropagation()}>
           sidebar
           <div onClick={toggleSidebar}>close</div>
           {themesColors.map((color: any) => {
@@ -50,6 +54,13 @@ const UserLayout: FC<Props> = ({ children }) => {
               </h2>
             );
           })}
+          <button
+            onClick={saveChanges}
+            style={{ marginTop: "2rem" }}
+            className='btn'
+          >
+            save and close
+          </button>
         </div>
       </aside>
       {children}

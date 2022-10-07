@@ -49,10 +49,17 @@ const Home: NextPage<Props> = ({ links, social, themesData }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   let data = { theme: "default", layout: "default" };
+  let themesData = {};
 
   await db.connect();
   const linksData = await UserLink.find({});
-  const themeConfig = await ThemeConfig.find({});
+  let themeConfig = await ThemeConfig.find({});
+  if (themeConfig.length === 0) {
+    await ThemeConfig.create(data);
+  } else {
+    themesData = JSON.parse(JSON.stringify(themeConfig[0]));
+  }
+
   await db.disconnect();
 
   const links = linksData.filter((item: LinkItemInt) => item.type === "links");
@@ -64,7 +71,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       links: JSON.parse(JSON.stringify(links)),
       social: JSON.parse(JSON.stringify(social)),
-      themesData: themeConfig[0] ? themeConfig[0] : data,
+      themesData,
     },
     revalidate: 10, // In seconds
   };

@@ -8,7 +8,6 @@ const UserLinkSchema = new Schema<LinkSchemaType>({
     type: String,
     required: [true, "Please provide name"],
     minLength: 3,
-    maxLength: 12,
   },
   url: {
     type: String,

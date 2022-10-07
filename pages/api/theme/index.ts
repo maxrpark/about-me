@@ -24,18 +24,14 @@ const getTheme: NextApiHandler = async (req, res) => {
 };
 
 const updateTheme: NextApiHandler = async (req, res) => {
-  const { url, name } = req.body;
-  if (!url || !name) {
-    return res.status(400).json("Please provide all values");
-  }
-
   try {
     await db.connect();
     const link = await ThemeConfig.findOneAndUpdate(
-      { _id: req.query.id },
-      { url, name },
+      { $first: req.body },
+      req.body,
       { runValidators: true, new: true }
     );
+    console.log(link);
 
     await db.disconnect();
     return res.status(200).json(link);
