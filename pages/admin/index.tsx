@@ -44,8 +44,8 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
             alt={"user-img"}
           />
         </figure>
-        <EditLinks data={profileData.links} />
-        <EditLinks data={profileData.social} />
+        <EditLinks type='links' data={profileData.links} />
+        <EditLinks type='social' data={profileData.social} />
         {showModal && <LinksModal />}
       </LinkWrapper>
     </UserLayout>

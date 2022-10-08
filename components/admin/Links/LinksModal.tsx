@@ -1,4 +1,4 @@
-import { FormRow, SelectRow } from "../..";
+import { FormRow, SelectRow, Spinner } from "../..";
 import { useGlobalContext } from "../../../context/globalContext";
 import { ModalLinksWrapper } from "../../../styles/wrappers";
 import { CloseIcon } from "../../icons";
@@ -8,6 +8,9 @@ const LinksModal: React.FC = () => {
     linkType,
     selectedLink,
     availableIcons,
+    isFormSubmitted,
+    isDeleting,
+    isDisabled,
     handleInputChange,
     handleFormSubmit,
     deleteItem,
@@ -52,16 +55,19 @@ const LinksModal: React.FC = () => {
             type='submit'
             className='btn confirm'
             onClick={handleFormSubmit}
+            disabled={isDisabled}
           >
-            Confirm
+            {isFormSubmitted ? <Spinner size={1.5} /> : "Confirm"}
           </button>
         </form>
-        <div
+        <button
+          type='submit'
           className='btn delete'
           onClick={() => deleteItem(selectedLink._id, linkType)}
+          disabled={isDisabled}
         >
-          Deleted
-        </div>
+          {isDeleting ? <Spinner size={1.5} /> : "Delete"}
+        </button>
       </div>
     </ModalLinksWrapper>
   );

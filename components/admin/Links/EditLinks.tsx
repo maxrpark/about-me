@@ -5,23 +5,22 @@ import { SingleLink } from "../../";
 
 interface Props {
   data: LinkItemInt[];
+  type: string;
 }
 
-const EditLinks: React.FC<Props> = ({ data }) => {
-  let classType = data[0].type!;
-
+const EditLinks: React.FC<Props> = ({ data, type }) => {
   const { selectItem, selectOrCreateItem } = useGlobalContext();
   return (
-    <div className={`${classType}-container`}>
+    <div className={`${type}-container`}>
       {data.map((link: LinkItemInt) => {
         const { _id, name } = link;
         return (
           <div
-            onClick={() => selectItem(_id, classType)}
-            className={`${classType}-btn`}
+            onClick={() => selectItem(_id, type)}
+            className={`${type}-btn`}
             key={_id}
           >
-            {classType === "social" ? (
+            {type === "social" ? (
               <SingleLink classType='social' name={name} />
             ) : (
               <>
@@ -34,11 +33,8 @@ const EditLinks: React.FC<Props> = ({ data }) => {
           </div>
         );
       })}
-      <div
-        className={`${classType}-add`}
-        onClick={() => selectOrCreateItem(classType)}
-      >
-        {classType === "social" ? "+" : "Add now button"}
+      <div className={`${type}-add`} onClick={() => selectOrCreateItem(type)}>
+        {type === "social" ? "+" : "Add now button"}
       </div>
     </div>
   );

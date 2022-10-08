@@ -6,7 +6,9 @@ export interface GlobalInitialState {
   selectedLink: any;
   linkType: string;
   availableIcons: any;
-  updateData: boolean;
+  isDeleting: boolean;
+  isDisabled: boolean;
+  isFormSubmitted: boolean;
 }
 
 export interface UserThemeInitialState {

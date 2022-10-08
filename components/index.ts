@@ -1,5 +1,6 @@
 import FormRow from "./ui/FormRow";
 import SelectRow from "./ui/SelectRow";
+import Spinner from "./ui/Spinner";
 
 import EditLinks from "./admin/Links/EditLinks";
 import LinksModal from "./admin/Links/LinksModal";
@@ -17,4 +18,5 @@ export {
   EditLinks,
   SingleLink,
   UserLayout,
+  Spinner,
 };

@@ -57,6 +57,13 @@ const global_reducer = (
         [type]: updatedValues,
       };
 
+    case ActionType.FORM_SUBMITTED:
+      return {
+        ...state,
+        isFormSubmitted: true,
+        isDisabled: true,
+      };
+
     case ActionType.ADD_ITEM:
       return {
         ...state,
@@ -68,7 +75,6 @@ const global_reducer = (
           ],
         },
         isEditing: false,
-        updateData: true,
       };
     case ActionType.EDIT_ITEM:
       let tempList = state.profileData[state.linkType].map(
@@ -88,7 +94,12 @@ const global_reducer = (
         ...state,
         profileData: editedProfileData,
         isEditing: false,
-        updateData: true,
+      };
+    case ActionType.DELETE_STARTED:
+      return {
+        ...state,
+        isDeleting: true,
+        isDisabled: true,
       };
     case ActionType.DELETE_ITEM:
       const { profileData } = state;
@@ -99,14 +110,15 @@ const global_reducer = (
       return {
         ...state,
         profileData,
-        updateData: true,
         showModal: false,
       };
 
     case ActionType.UPDATE_DATA_END:
       return {
         ...state,
-        updateData: false,
+        isDeleting: false,
+        isFormSubmitted: false,
+        isDisabled: false,
       };
 
     default:

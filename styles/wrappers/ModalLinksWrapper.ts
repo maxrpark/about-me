@@ -72,6 +72,9 @@ const ModalLinksWrapper = styled.div`
     width: 120px;
     color: var(--color-white-1);
   }
+  .btn:disabled {
+    opacity: 0.6;
+  }
 
   .close-icon {
     position: absolute;

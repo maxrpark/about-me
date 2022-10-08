@@ -40,8 +40,8 @@ const Home: NextPage<Props> = ({ links, social, themesData }) => {
             </a>
           </Link>
         </figure>
-        <MyLinks data={links} />
-        <MyLinks data={social} />
+        <MyLinks type='links' data={links} />
+        <MyLinks type='social' data={social} />
       </LinkWrapper>
     </main>
   );

@@ -16,6 +16,9 @@ interface SET_DATA {
   type: ActionType.SET_DATA;
   payload: ProfileDataInt;
 }
+interface DELETE_STARTED {
+  type: ActionType.DELETE_STARTED;
+}
 interface DELETE_ITEM {
   type: ActionType.DELETE_ITEM;
   payload: string;
@@ -28,6 +31,9 @@ interface SELECT_ITEM {
 interface HANDLE_FORM_INPUT {
   type: ActionType.HANDLE_FORM_INPUT;
   payload: HandleFormInt;
+}
+interface FORM_SUBMITTED {
+  type: ActionType.FORM_SUBMITTED;
 }
 interface EDIT_ITEM {
   type: ActionType.EDIT_ITEM;
@@ -52,7 +58,9 @@ interface UPDATE_DATA_END {
 
 export type Action =
   | SET_DATA
+  | DELETE_STARTED
   | DELETE_ITEM
+  | FORM_SUBMITTED
   | HANDLE_FORM_INPUT
   | SELECT_ITEM
   | EDIT_ITEM

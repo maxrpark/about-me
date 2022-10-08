@@ -24,9 +24,10 @@ interface GlobalContext {
   selectedLink: LinkItemInt;
   linkType: string;
   availableIcons: any;
-  updateData: boolean;
+  isDeleting: boolean;
+  isFormSubmitted: boolean;
+  isDisabled: boolean;
   setData: (data: any) => void;
-  saveThemeChanges: () => void;
   closeModal: () => void;
   selectOrCreateItem: (linkType: string) => void;
   deleteItem: (id: string, linkType: string) => void;
@@ -45,7 +46,9 @@ const initialState: GlobalInitialState = {
   isEditing: false,
   showModal: false,
   availableIcons: AvailableIcons,
-  updateData: false,
+  isFormSubmitted: false,
+  isDeleting: false,
+  isDisabled: false,
   linkType: "",
   selectedLink: {
     id: "",
@@ -98,32 +101,46 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
 
   // FORM SUBMIT
   const handleFormSubmit = async (e: React.FormEvent) => {
+    dispatch({
+      type: ActionType.FORM_SUBMITTED,
+    });
     e.preventDefault();
     if (state.selectedLink.name && state.selectedLink.name.trim() !== "") {
       if (state.isEditing) {
         let body = {
           ...state.selectedLink,
         };
-        let res = await axios.patch(
-          `/api/links/${state.selectedLink._id}`,
-          body
-        );
+        try {
+          let res = await axios.patch(
+            `/api/links/${state.selectedLink._id}`,
+            body
+          );
 
-        dispatch({
-          type: ActionType.EDIT_ITEM,
-          payload: res.data,
-        });
+          dispatch({
+            type: ActionType.EDIT_ITEM,
+            payload: res.data,
+          });
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         let body = {
           ...state.selectedLink,
           type: state.linkType,
         };
-        let res = await axios.post("/api/links", body);
-        dispatch({
-          type: ActionType.ADD_ITEM,
-          payload: res.data,
-        });
+        try {
+          let res = await axios.post("/api/links", body);
+          dispatch({
+            type: ActionType.ADD_ITEM,
+            payload: res.data,
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
+      dispatch({
+        type: ActionType.UPDATE_DATA_END,
+      });
 
       dispatch({
         type: ActionType.TOGGLE_MODAL,
@@ -134,14 +151,20 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   };
 
   const deleteItem = async (id: string) => {
+    dispatch({
+      type: ActionType.DELETE_STARTED,
+    });
     try {
       await axios.delete(`/api/links/${id}`);
+      dispatch({
+        type: ActionType.DELETE_ITEM,
+        payload: id,
+      });
     } catch (error) {
       console.log(error);
     }
     dispatch({
-      type: ActionType.DELETE_ITEM,
-      payload: id,
+      type: ActionType.UPDATE_DATA_END,
     });
   };
 
@@ -167,30 +190,6 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
-  const saveThemeChanges = async () => {
-    // const body = {
-    //   data: state.profileData,
-    //   fileName: "db_about_me",
-    // };
-    // try {
-    //   await fetch("/api/db", {
-    //     method: "POST",
-    //     body: JSON.stringify(body),
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // dispatch({
-    //   type: ActionType.UPDATE_DATA_END,
-    // });
-  };
-
-  useEffect(() => {
-    if (state.updateData) {
-      // saveThemeChanges();
-    }
-  }, [state.profileData.links, state.profileData.social]);
-
   return (
     <GlobalContext.Provider
       value={{
@@ -198,7 +197,6 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         setData,
         deleteItem,
         selectItem,
-        saveThemeChanges,
         handleInputChange,
         handleFormSubmit,
         selectOrCreateItem,
