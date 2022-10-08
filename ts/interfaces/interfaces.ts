@@ -3,6 +3,7 @@ export interface User {
   email: string;
   isAdmin: boolean;
   image: string;
+  avatar_url?: string;
 }
 export interface LinkItemInt {
   type?: string;

@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import type { NextPage } from "next";
-import Image from "next/image";
 
 import { useGlobalContext, useUserThemeContext } from "../../context";
-import { LinkItemInt, ThemeDataInt } from "../../ts/interfaces";
+import { LinkItemInt, ThemeDataInt, User } from "../../ts/interfaces";
 import {
   LinksModal,
   EditLinks,
@@ -12,17 +11,13 @@ import {
   UserDetails,
 } from "../../components";
 import { LinkWrapper } from "../../styles/wrappers";
-
-import UserLink from "../../db/model/Links";
-import { db } from "../../db/connectDB";
-import ThemeConfig from "../../db/model/Theme";
-import axios from "axios";
+import getData from "../../db/getData";
 
 interface Props {
   links: LinkItemInt[];
   social: LinkItemInt[];
-  themesData: any;
-  user: any;
+  themesData: ThemeDataInt;
+  user: User;
 }
 
 const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
@@ -43,7 +38,7 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
   return (
     <UserLayout>
       <LinkWrapper className='layout'>
-        <UserDetails user={user} />
+        <UserDetails {...user} />
         <EditLinks type='links' data={profileData.links} />
         <EditLinks type='social' data={profileData.social} />
         {showModal && <LinksModal />}
@@ -53,33 +48,14 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let themesData: ThemeDataInt = { theme: "default", layout: "default" };
-
-  let res = await axios(
-    `https://api.github.com/users/${process.env.USER_NAME}`
-  );
-
-  await db.connect();
-  const linksData = await UserLink.find({});
-  let themeConfig: ThemeDataInt[] | null = await ThemeConfig.find({});
-  if (themeConfig && themeConfig.length === 0) {
-    await ThemeConfig.create(themesData);
-  } else {
-    themesData = JSON.parse(JSON.stringify(themeConfig[0]));
-  }
-  await db.disconnect();
-
-  const links = linksData.filter((item: LinkItemInt) => item.type === "links");
-  const social = linksData.filter(
-    (item: LinkItemInt) => item.type === "social"
-  );
+  let { user, links, social, themesData } = await getData();
 
   return {
     props: {
-      links: JSON.parse(JSON.stringify(links)),
-      social: JSON.parse(JSON.stringify(social)),
+      links,
+      social,
       themesData,
-      user: res.data,
+      user,
     },
   };
 };

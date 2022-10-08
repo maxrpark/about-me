@@ -1,12 +1,9 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { UserDetailsWrapper } from "../../styles/wrappers";
+import { User } from "../../ts/interfaces/interfaces";
 
-interface Props {
-  user: any;
-}
-
-const UserDetails: React.FC<Props> = ({ user }) => {
+const UserDetails: React.FC<User> = ({ image, name }) => {
   const router = useRouter();
   const handleClick = () => {
     if (router.asPath != "/") return;
@@ -15,14 +12,9 @@ const UserDetails: React.FC<Props> = ({ user }) => {
   return (
     <UserDetailsWrapper>
       <figure className='user-image' onClick={handleClick}>
-        <Image
-          src={user.avatar_url}
-          width={100}
-          height={100}
-          alt={"user-img"}
-        />
+        <Image src={image} width={100} height={100} alt={"user-img"} />
       </figure>
-      <p>{user.name}</p>
+      <p>{name}</p>
     </UserDetailsWrapper>
   );
 };
