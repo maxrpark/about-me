@@ -5,20 +5,27 @@ import Image from "next/image";
 
 import { useGlobalContext, useUserThemeContext } from "../../context";
 import { LinkItemInt, ThemeDataInt } from "../../ts/interfaces";
-import { LinksModal, EditLinks, UserLayout } from "../../components";
+import {
+  LinksModal,
+  EditLinks,
+  UserLayout,
+  UserDetails,
+} from "../../components";
 import { LinkWrapper } from "../../styles/wrappers";
 
 import UserLink from "../../db/model/Links";
 import { db } from "../../db/connectDB";
 import ThemeConfig from "../../db/model/Theme";
+import axios from "axios";
 
 interface Props {
   links: LinkItemInt[];
   social: LinkItemInt[];
   themesData: any;
+  user: any;
 }
 
-const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
+const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
   const { profileData, showModal, setData } = useGlobalContext();
   const { setThemeData } = useUserThemeContext();
 
@@ -36,14 +43,7 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
   return (
     <UserLayout>
       <LinkWrapper className='layout'>
-        <figure className='user-image'>
-          <Image
-            src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
-            width={100}
-            height={100}
-            alt={"user-img"}
-          />
-        </figure>
+        <UserDetails user={user} />
         <EditLinks type='links' data={profileData.links} />
         <EditLinks type='social' data={profileData.social} />
         {showModal && <LinksModal />}
@@ -55,6 +55,10 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData }) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   let themesData: ThemeDataInt = { theme: "default", layout: "default" };
 
+  let res = await axios(
+    `https://api.github.com/users/${process.env.USER_NAME}`
+  );
+
   await db.connect();
   const linksData = await UserLink.find({});
   let themeConfig: ThemeDataInt[] | null = await ThemeConfig.find({});
@@ -63,7 +67,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   } else {
     themesData = JSON.parse(JSON.stringify(themeConfig[0]));
   }
-
   await db.disconnect();
 
   const links = linksData.filter((item: LinkItemInt) => item.type === "links");
@@ -76,8 +79,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
       links: JSON.parse(JSON.stringify(links)),
       social: JSON.parse(JSON.stringify(social)),
       themesData,
+      user: res.data,
     },
-    // revalidate: 10, // In seconds
   };
 };
 

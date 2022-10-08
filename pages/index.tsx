@@ -1,24 +1,24 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
-import Image from "next/image";
-import Link from "next/link";
 
 import { LinkWrapper } from "../styles/wrappers";
-import { MyLinks } from "../components";
+import { MyLinks, UserDetails } from "../components";
 import { LinkItemInt, ThemeDataInt } from "../ts/interfaces";
 import { useUserThemeContext } from "../context";
 import { db } from "../db/connectDB";
 import UserLink from "../db/model/Links";
 import ThemeConfig from "../db/model/Theme";
+import axios from "axios";
 
 interface Props {
   links: LinkItemInt[];
   social: LinkItemInt[];
   themesData: ThemeDataInt;
+  user: any;
 }
 
-const Home: NextPage<Props> = ({ links, social, themesData }) => {
+const Home: NextPage<Props> = ({ links, social, themesData, user }) => {
   const { setThemeData } = useUserThemeContext();
 
   useEffect(() => {
@@ -28,18 +28,7 @@ const Home: NextPage<Props> = ({ links, social, themesData }) => {
   return (
     <main>
       <LinkWrapper className='layout'>
-        <figure className='user-image'>
-          <Link href={"/admin"}>
-            <a>
-              <Image
-                src={"https://avatars.githubusercontent.com/u/84664090?v=4"}
-                width={100}
-                height={100}
-                alt={"user-img"}
-              />
-            </a>
-          </Link>
-        </figure>
+        <UserDetails user={user} />
         <MyLinks type='links' data={links} />
         <MyLinks type='social' data={social} />
       </LinkWrapper>
@@ -49,6 +38,10 @@ const Home: NextPage<Props> = ({ links, social, themesData }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let themesData: ThemeDataInt = { theme: "default", layout: "default" };
+
+  let res = await axios(
+    `https://api.github.com/users/${process.env.USER_NAME}`
+  );
 
   await db.connect();
   const linksData = await UserLink.find({});
@@ -71,6 +64,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       links: JSON.parse(JSON.stringify(links)),
       social: JSON.parse(JSON.stringify(social)),
       themesData,
+      user: res.data,
     },
   };
 };
