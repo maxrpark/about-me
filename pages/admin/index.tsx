@@ -27,10 +27,10 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
   let linksData = { links, social };
 
   useEffect(() => {
-    if (!profileData.links) {
-      setData(linksData);
-      setThemeData(themesData);
-    }
+    // if (!profileData.links) {
+    setData(linksData);
+    setThemeData(themesData);
+    // }
   }, []);
   if (!profileData?.links) {
     return <h2>Loading!</h2>;
