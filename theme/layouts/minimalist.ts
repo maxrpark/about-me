@@ -1,5 +1,5 @@
 const minimalistLayout = `
-.minimalist .layout{
+.minimalist .links-content{
   flex-direction: column-reverse;
   gap:1rem;
 }

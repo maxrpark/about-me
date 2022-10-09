@@ -26,8 +26,10 @@ const Home: NextPage<Props> = ({ links, social, themesData, user }) => {
     <main>
       <LinkWrapper className='layout'>
         <UserDetails {...user} />
-        <MyLinks type='links' data={links} />
-        <MyLinks type='social' data={social} />
+        <section className='links-content'>
+          <MyLinks type='links' data={links} />
+          <MyLinks type='social' data={social} />
+        </section>
       </LinkWrapper>
     </main>
   );

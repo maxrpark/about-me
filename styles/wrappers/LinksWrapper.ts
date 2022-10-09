@@ -3,13 +3,18 @@ import styled from "styled-components";
 const LinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1rem;
   position: relative;
-  /* justify-content: center; */
   align-items: center;
   height: 100%;
   margin-top: 70px;
 
+  .links-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
   .links-container {
     width: 100%;
     max-width: 500px;

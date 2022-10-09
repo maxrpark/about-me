@@ -39,8 +39,10 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
     <UserLayout>
       <LinkWrapper className='layout'>
         <UserDetails {...user} />
-        <EditLinks type='links' data={profileData.links} />
-        <EditLinks type='social' data={profileData.social} />
+        <section className='links-content'>
+          <EditLinks type='links' data={profileData.links} />
+          <EditLinks type='social' data={profileData.social} />
+        </section>
         {showModal && <LinksModal />}
       </LinkWrapper>
     </UserLayout>
