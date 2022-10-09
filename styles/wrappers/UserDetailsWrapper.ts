@@ -4,6 +4,7 @@ const UserDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  text-align: center;
 
   .user-image {
     width: 100px;
