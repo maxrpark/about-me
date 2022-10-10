@@ -14,7 +14,7 @@ export default withAuth(
         if (token && token.email === process.env.ADMINISTRATOR) {
           return true;
         }
-        return true;
+        return false;
       },
     },
   }
