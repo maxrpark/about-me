@@ -4,6 +4,7 @@ import GithubFill from "./GithubFill";
 import HomeIcon from "./Home";
 import Pencil from "./Pencil";
 import CloseIcon from "./CloseIcon";
+import Check from "./Check";
 
 export enum Icon {
   TWITTER = "twitter",
@@ -35,4 +36,4 @@ export const AvailableIcons = [
   },
 ];
 
-export { HomeIcon, Pencil, CloseIcon };
+export { HomeIcon, Pencil, CloseIcon, Check };

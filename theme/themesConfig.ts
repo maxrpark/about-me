@@ -1,15 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { minimalistLayout } from "./layouts/index";
 
-declare module "styled-components" {
-  export interface DefaultTheme {
-    textColor: string;
-    bgColor: string;
-    buttonColor: string;
-    textColorSecondary: string;
-  }
-}
-
 export const GlobalStyle = createGlobalStyle`
 
 * {

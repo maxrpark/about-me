@@ -27,7 +27,7 @@ const themesColor = [
 const themesLayouts = [
   { id: 1, name: "default" },
   { id: 2, name: "minimalist" },
-  { id: 3, name: "styles" },
+  // { id: 3, name: "styles" },
 ];
 
 interface UserContext {

@@ -2,7 +2,7 @@ import { ReactElement, FC } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { signOut } from "next-auth/react";
-import { HomeIcon } from "../icons";
+import { Check, HomeIcon } from "../icons";
 
 import React from "react";
 import { useUserThemeContext } from "../../context/userThemeContext";
@@ -11,6 +11,8 @@ interface Props {
 }
 const UserLayout: FC<Props> = ({ children }) => {
   const {
+    layout: currentLayout,
+    theme,
     isSidebarOpen,
     themesColors,
     themesLayouts,
@@ -43,22 +45,35 @@ const UserLayout: FC<Props> = ({ children }) => {
             {themesColors.map((color: any) => {
               return (
                 <div
-                  className='color-icon'
+                  className={`color-icon`}
                   style={{ background: color.color }}
                   key={color.id}
                   onClick={() => changeThemeColor(color.name)}
-                ></div>
+                >
+                  {color.name === theme && <Check size={25} />}
+                </div>
               );
             })}
           </div>
           <h2 style={{ margin: "2rem" }}>Layouts</h2>
-          {themesLayouts.map((theme: any) => {
-            return (
-              <h2 key={theme.id} onClick={() => changeThemeLayout(theme.name)}>
-                {theme.name}
-              </h2>
-            );
-          })}
+          <div className='layout-container'>
+            {themesLayouts.map((layout: any) => {
+              return (
+                <button
+                  className={`${layout.name} single-layout `}
+                  key={layout.id}
+                  onClick={() => changeThemeLayout(layout.name)}
+                >
+                  {layout.name}
+                  {layout.name === currentLayout && (
+                    <span className='check-icon'>
+                      <Check size={25} />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
           <button
             onClick={saveChanges}
             style={{ marginTop: "2rem" }}
@@ -102,7 +117,8 @@ const Wrapper = styled.main`
     width: 40%;
     margin-left: auto;
     transition: 0.3s linear all;
-    background: ${(props) => props.theme.buttonColor};
+    background: ${(props) => props.theme.textColorSecondary};
+    color: ${(props) => props.theme.sidebarText};
     transform: translateX(100%);
   }
   .sidebar-open .content {
@@ -115,11 +131,51 @@ const Wrapper = styled.main`
     justify-content: center;
     margin: 1rem;
   }
-  .color-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+  .layout-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
   }
+  .single-layout {
+    height: 45px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 20px;
+    transition: var(--transition-1);
+    background: ${(props) => props.theme.sidebarText};
+    border: none;
+  }
+
+  .minimalist.single-layout {
+    color: ${(props) => props.theme.sidebarText};
+  }
+  .check-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 8px;
+    border-radius: 50%;
+    background: var(--theme-two-primary-light);
+    background: ${(props) => props.theme.buttonColor};
+  }
+
+  .color-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    border: 2px solid ${(props) => props.theme.bgColor};
+    transition: all 0.3s linear;
+  }
+
   @keyframes sideBarAnimation {
     0% {
       transform: translateX(100%);

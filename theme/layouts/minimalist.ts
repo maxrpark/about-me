@@ -5,13 +5,11 @@ const minimalistLayout = `
 }
 
 .minimalist .links-btn, .minimalist 
-.links-add {
+.links-add, .minimalist.single-layout {
     border-radius: 0;
     background:transparent;
     border:1px solid
   }
-
-
   .minimalist .social-btn svg,
   .minimalist .social-add {
     width: 45px;

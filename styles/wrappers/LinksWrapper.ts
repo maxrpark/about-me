@@ -41,8 +41,6 @@ const LinkWrapper = styled.div`
     box-shadow: var(--box-shadow-1);
     background: ${(props) => props.theme.buttonColor};
     position: relative;
-    padding: 20px;
-    width: 100%;
   }
 
   .social-container {
@@ -76,12 +74,12 @@ const LinkWrapper = styled.div`
     color: ${(props) => props.theme.textColor};
   }
   .pencil {
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    width: 36px;
-    height: 36px;
     right: 8px;
     border-radius: 50%;
     background: white;
