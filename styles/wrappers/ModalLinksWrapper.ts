@@ -30,9 +30,18 @@ const ModalLinksWrapper = styled.div`
   }
 
   .editing-link {
-    margin-top: 3rem;
+    margin-top: 2rem;
     width: 100%;
-    min-height: 50px;
+    min-height: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .preview {
+    display: block;
+    /* margin-bottom: 0.5rem; */
+    font-size: 1rem;
+    text-align: center;
   }
 
   form {

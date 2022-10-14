@@ -6,6 +6,9 @@ import { LinkItemInt, ProfileDataInt } from "../ts/interfaces";
 import { AvailableIcons } from "../components/icons";
 import axios from "axios";
 
+let reg =
+  /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+
 type Props = {
   children: React.ReactNode;
 };
@@ -105,6 +108,11 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
       type: ActionType.FORM_SUBMITTED,
     });
     e.preventDefault();
+
+    if (!reg.test(state.selectedLink.url)) {
+      console.log("error");
+    }
+
     if (state.selectedLink.name && state.selectedLink.name.trim() !== "") {
       if (state.isEditing) {
         let body = {

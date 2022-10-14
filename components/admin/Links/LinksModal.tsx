@@ -24,6 +24,7 @@ const LinksModal: React.FC = () => {
           <CloseIcon />
         </div>
         <div className='editing-link'>
+          <label className='preview'>Preview</label>
           <SingleLink classType={linkType} name={selectedLink.name} />
         </div>
         <form>

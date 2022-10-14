@@ -60,12 +60,11 @@ svg{
 
 
 main{
-padding: .5rem;
-display: flex;
-flex-direction: column;
-gap: 3rem;
-position: relative;
+  padding: 0 0.5rem;
+  position: relative;
 }
+
+
 
 
 `;
