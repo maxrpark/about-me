@@ -60,7 +60,7 @@ svg{
 
 
 main{
-  padding: 0 0.5rem;
+  /* padding: 0 0.5rem; */
   position: relative;
 }
 

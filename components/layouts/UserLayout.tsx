@@ -6,11 +6,11 @@ interface Props {
 }
 const UserLayout: FC<Props> = ({ children }) => {
   return (
-    <div>
+    <>
       <Navbar />
       <Sidebar />
       {children}
-    </div>
+    </>
   );
 };
 

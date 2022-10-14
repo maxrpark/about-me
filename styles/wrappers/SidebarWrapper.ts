@@ -6,7 +6,6 @@ const SidebarWrapper = styled.aside`
     width: 100%;
     overflow: hidden;
     position: absolute;
-    /* background: rgba(0, 0, 0, 0.475); */
     top: 0;
     right: 0;
     z-index: -10;

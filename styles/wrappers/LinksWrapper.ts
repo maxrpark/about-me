@@ -8,7 +8,7 @@ const LinkWrapper = styled.div`
   align-items: center;
   height: 100%;
   margin-top: 70px;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
 
   .links-content {
     width: 100%;
