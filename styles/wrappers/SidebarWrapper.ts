@@ -4,6 +4,7 @@ const SidebarWrapper = styled.aside`
   .sidebar {
     height: 100vh;
     width: 100%;
+    overflow: hidden;
     position: absolute;
     /* background: rgba(0, 0, 0, 0.475); */
     top: 0;
@@ -18,7 +19,7 @@ const SidebarWrapper = styled.aside`
   }
   .content {
     height: 100vh;
-    width: 40%;
+    width: 50%;
     margin-left: auto;
     transition: 0.3s linear all;
     background: ${(props) => props.theme.textColorSecondary};

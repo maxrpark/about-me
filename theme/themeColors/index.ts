@@ -27,7 +27,7 @@ const darkTheme: DefaultTheme = {
   sidebarText: "var(--theme-two-primary-light)",
 };
 
-const pinkTheme: DefaultTheme = {
+const theme_3: DefaultTheme = {
   bgColor: "var(--theme-three-primary-light)",
   textColor: "var(--theme-three-primary-dark)",
   buttonColor: "var(--theme-three-primary)",
@@ -35,7 +35,7 @@ const pinkTheme: DefaultTheme = {
   sidebarText: "var(--theme-three-primary-light)",
 };
 
-const lightTheme: DefaultTheme = {
+const theme_4: DefaultTheme = {
   bgColor: "var(--theme-four-primary-light)",
   textColor: "var(--theme-four-primary-dark)",
   buttonColor: "var(--theme-four-primary)",
@@ -46,6 +46,6 @@ const lightTheme: DefaultTheme = {
 export const themesList: any = {
   default: defaultTheme,
   dark: darkTheme,
-  pink: pinkTheme,
-  light: lightTheme,
+  theme_3,
+  theme_4,
 };

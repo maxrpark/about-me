@@ -11,7 +11,7 @@ const ThemeConfigSchema = new Schema<ThemeSchemaType>({
   theme: {
     type: String,
     enum: {
-      values: ["default", "dark", "costume", "pink", "light"],
+      values: ["default", "dark", "theme_3", "theme_4"],
       message: "{VALUE} is not a valid type",
     },
     required: [true, "Please enter a theme type"],
@@ -19,7 +19,7 @@ const ThemeConfigSchema = new Schema<ThemeSchemaType>({
   layout: {
     type: String,
     enum: {
-      values: ["default", "minimalist", "styles"],
+      values: ["default", "minimalist"],
       message: "{VALUE} is not a valid type",
     },
     required: [true, "Please enter a layout type"],

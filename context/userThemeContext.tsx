@@ -11,23 +11,22 @@ type Props = {
 };
 
 enum ThemeColor {
-  DEFAULT = "default",
-  DARK = "dark",
-  PINK = "pink",
-  LIGHT = "light",
+  DEFAULT = "default", // default
+  DARK = "dark", //dark
+  THEME_3 = "theme_3", // pink
+  THEME_4 = "theme_4", // light
 }
 
 const themesColor = [
   { id: 1, name: ThemeColor.DEFAULT, color: "var(--theme-one-primary)" },
   { id: 2, name: ThemeColor.DARK, color: "var(--theme-two-primary)" },
-  { id: 3, name: ThemeColor.PINK, color: "var(--theme-three-primary)" },
-  { id: 4, name: ThemeColor.LIGHT, color: "var(--theme-four-primary)" },
+  { id: 3, name: ThemeColor.THEME_3, color: "var(--theme-three-primary)" },
+  { id: 4, name: ThemeColor.THEME_4, color: "var(--theme-four-primary)" },
 ];
 
 const themesLayouts = [
   { id: 1, name: "default" },
   { id: 2, name: "minimalist" },
-  // { id: 3, name: "styles" },
 ];
 
 interface UserContext {
@@ -54,6 +53,7 @@ const InitialState: UserThemeInitialState = {
 };
 
 const UserThemeContext = React.createContext({} as UserContext);
+
 export const UserThemeProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(
     user_theme_reducer,
