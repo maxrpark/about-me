@@ -69,6 +69,7 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
           onChange={handleFormChange}
           value={userForm.password}
           name='password'
+          type={"password"}
         />
         <button className='btn' type='submit' onClick={handleFormSubmit}>
           {isAlreadyRegister ? "login" : "register"}
