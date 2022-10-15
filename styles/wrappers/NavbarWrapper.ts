@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 const NavbarWrapper = styled.nav`
-  position: absolute;
+  position: fixed;
   z-index: 1;
   width: 100%;
   top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -33,7 +35,7 @@ const NavbarWrapper = styled.nav`
     border: none;
     background: transparent;
     cursor: pointer;
-    color: ${(props) => props.theme.textColorSecondary};
+    color: ${(props) => props.theme.textColor};
     transition: all 0.2s linear;
     position: relative;
   }

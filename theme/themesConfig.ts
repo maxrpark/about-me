@@ -62,6 +62,24 @@ svg{
 main{
   /* padding: 0 0.5rem; */
   position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 38px 0;
+}
+
+input,
+select {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem;
 }
 
 

@@ -14,7 +14,7 @@ const ModalLinksWrapper = styled.div`
   background: rgba(33, 33, 33, 0.8);
 
   .modal {
-    max-width: 500px;
+    /* max-width: 500px; */
     height: 375px;
     position: relative;
     display: flex;
@@ -42,21 +42,6 @@ const ModalLinksWrapper = styled.div`
     /* margin-bottom: 0.5rem; */
     font-size: 1rem;
     text-align: center;
-  }
-
-  form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 38px 0;
-  }
-
-  input,
-  select {
-    width: 100%;
-    height: 2.5rem;
-    padding: 0.5rem;
   }
 
   .btn {

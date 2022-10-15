@@ -18,7 +18,8 @@ const LinkWrapper = styled.div`
   }
   .links-container {
     width: 100%;
-    max-width: 500px;
+    /* max-width: 500px;
+    margin: 0 auto; */
     display: flex;
     flex-direction: column;
     align-items: center;

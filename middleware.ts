@@ -11,10 +11,10 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
-        if (token && token.email === process.env.ADMINISTRATOR) {
+        if (token) {
           return true;
         }
-        return true;
+        return false;
       },
     },
   }

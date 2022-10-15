@@ -5,6 +5,8 @@ import { useState } from "react";
 import { db } from "../db/connectDB";
 import User from "../db/model/User";
 import axios from "axios";
+import { useRouter } from "next/router";
+import styled from "styled-components";
 
 const useDetails = {
   name: "",
@@ -16,7 +18,7 @@ interface Props {
 
 const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
   const [userForm, setUserForm] = useState(useDetails);
-
+  const router = useRouter();
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -27,14 +29,39 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
   };
 
   const handleFormClick = async () => {
-    const res = await axios.post(`/api/auth/register`, userForm);
-    console.log(res.data);
+    if (!isAlreadyRegister) {
+      try {
+        const res = await axios.post(`/api/auth/register`, userForm);
+        await signIn("credentials", {
+          redirect: false,
+          ...userForm,
+        });
+        if (res.status === 200) {
+          router.push("/admin");
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const res = await signIn("credentials", {
+          redirect: false,
+          ...userForm,
+        });
+
+        if (res?.status === 200) {
+          router.push("/admin");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   return (
-    <div>
+    <Wrapper>
       <h2>Hello</h2>
 
-      {isAlreadyRegister ? "Register" : "login"}
+      {isAlreadyRegister ? "login" : "register"}
       <form>
         <input onChange={handleFormChange} value={userForm.name} name='name' />
         <input
@@ -44,16 +71,18 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
         />
       </form>
       <button onClick={handleFormClick}>Sign in</button>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.main``;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const res = await getSession(ctx);
 
   await db.connect();
   const isAlreadyRegister =
-    (await User.countDocuments({})) === 0 ? true : false;
+    (await User.countDocuments({})) === 0 ? false : true;
   await db.disconnect();
   if (res?.user) {
     return {

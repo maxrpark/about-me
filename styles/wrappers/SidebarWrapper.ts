@@ -5,7 +5,7 @@ const SidebarWrapper = styled.aside`
     height: 100vh;
     width: 100%;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: -10;

@@ -25,10 +25,11 @@ const UserSchema = new Schema<UserSchemaInt>({
   },
   role: {
     type: String,
-    default: "admin",
+    default: "token",
   },
   image: {
     type: String,
+    default: "/user-icon.jpg",
   },
 });
 

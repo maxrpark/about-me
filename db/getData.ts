@@ -1,8 +1,9 @@
 import axios from "axios";
-import { LinkItemInt, ThemeDataInt, User } from "../ts/interfaces";
+import { LinkItemInt, ThemeDataInt } from "../ts/interfaces";
 import { db } from "./connectDB";
 import UserLink from "./model/Links";
 import ThemeConfig from "./model/Theme";
+import User from "./model/User";
 
 const getData = async () => {
   let themesData: ThemeDataInt = { theme: "default", layout: "default" };
@@ -17,20 +18,33 @@ const getData = async () => {
   //   email: data.email,
   // };
 
-  let user = {
+  let user;
+
+  let defaultUser: any = {
     name: "Maxi Ruti",
-    image:
-      "https://avatars.githubusercontent.com/u/84664090?s=400&u=1541d34fbd7b9a4fc483d641887cd6bf1e113d9a&v=4",
+    image: "/user-icon.jpg",
     isAdmin: true,
     email: "maxirutipark",
   };
   await db.connect();
+
+  // links
   const linksData = await UserLink.find({});
+
+  // theme
   let themeConfig: ThemeDataInt[] | null = await ThemeConfig.find({});
   if (themeConfig && themeConfig.length === 0) {
     await ThemeConfig.create(themesData);
   } else {
     themesData = JSON.parse(JSON.stringify(themeConfig[0]));
+  }
+
+  // user
+  let dbUser = await User.find({});
+  if (dbUser && dbUser.length === 0) {
+    user = defaultUser;
+  } else {
+    user = JSON.parse(JSON.stringify(dbUser[0]));
   }
 
   await db.disconnect();
