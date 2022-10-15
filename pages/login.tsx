@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import { getSession, signIn } from "next-auth/react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { db } from "../db/connectDB";
 import User from "../db/model/User";
 import axios from "axios";
@@ -19,6 +19,7 @@ interface Props {
 const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
   const [userForm, setUserForm] = useState(useDetails);
   const router = useRouter();
+
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -28,7 +29,10 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
     });
   };
 
-  const handleFormClick = async () => {
+  const handleFormSubmit = async (e: FormEvent) => {
+    console.log(e);
+
+    e.preventDefault();
     if (!isAlreadyRegister) {
       try {
         const res = await axios.post(`/api/auth/register`, userForm);
@@ -71,7 +75,7 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
           value={userForm.password}
           name='password'
         />
-        <button className='btn' onClick={handleFormClick}>
+        <button className='btn' type='submit' onClick={handleFormSubmit}>
           {isAlreadyRegister ? "login" : "register"}
         </button>
       </form>
@@ -116,7 +120,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (res?.user) {
     return {
       redirect: {
-        permanent: true,
         destination: "/admin",
       },
       props: {},
