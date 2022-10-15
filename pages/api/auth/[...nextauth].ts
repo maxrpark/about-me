@@ -21,8 +21,6 @@ export default NextAuth({
 
       async authorize(credentials) {
         const { name, password } = credentials as any;
-        console.log(credentials);
-        console.log("hello");
 
         await db.connect();
         const user = await User.findOne({ name });

@@ -60,7 +60,8 @@ svg{
 
 
 main{
-  /* padding: 0 0.5rem; */
+  min-height: 100vh;
+  padding: 0 0.5rem;
   position: relative;
   max-width: 500px;
   margin: 0 auto;
