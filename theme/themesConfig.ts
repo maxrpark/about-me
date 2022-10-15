@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { minimalistLayout } from "./layouts/index";
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -52,7 +51,7 @@ a{
 }
 
 
-${minimalistLayout}
+
 
 svg{
  fill: ${(props) => props.theme.textColor};;
@@ -82,7 +81,6 @@ select {
   height: 2.5rem;
   padding: 0.5rem;
 }
-
 
 
 

@@ -54,6 +54,12 @@ const SidebarWrapper = styled.aside`
   }
 
   .minimalist.single-layout {
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid;
+  }
+
+  .minimalist.single-layout {
     color: ${(props) => props.theme.sidebarText};
   }
   .check-icon {

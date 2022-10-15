@@ -30,8 +30,6 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
-    console.log(e);
-
     e.preventDefault();
     if (!isAlreadyRegister) {
       try {
@@ -52,9 +50,6 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
           redirect: false,
           ...userForm,
         });
-
-        console.log(res);
-
         if (res?.status === 200) {
           router.push("/admin");
         }

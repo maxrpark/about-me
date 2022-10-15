@@ -22,7 +22,7 @@ interface Props {
 
 const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
   const { profileData, showModal, setData } = useGlobalContext();
-  const { setThemeData } = useUserThemeContext();
+  const { setThemeData, layout } = useUserThemeContext();
 
   let linksData = { links, social };
 
@@ -39,7 +39,7 @@ const ChangePage: NextPage<Props> = ({ links, social, themesData, user }) => {
     <UserLayout>
       <LinkWrapper className='layout'>
         <UserDetails {...user} />
-        <section className='links-content'>
+        <section className={`links-content ${layout}`}>
           <EditLinks type='links' data={profileData.links} />
           <EditLinks type='social' data={profileData.social} />
         </section>
