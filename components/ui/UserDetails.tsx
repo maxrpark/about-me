@@ -12,7 +12,8 @@ const UserDetails: React.FC<User> = ({ image, name }) => {
   return (
     <UserDetailsWrapper>
       <figure className='user-image' onClick={handleClick}>
-        <Image src={image} width={100} height={100} alt={"user-img"} />
+        {/* <Image src={image} width={100} height={100} alt={"user-img"} /> */}
+        <img src={image} alt='' />
       </figure>
       <p>{name}</p>
     </UserDetailsWrapper>

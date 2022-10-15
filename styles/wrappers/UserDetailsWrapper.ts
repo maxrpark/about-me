@@ -16,6 +16,10 @@ const UserDetailsWrapper = styled.div`
     overflow: hidden;
     margin: 0 auto;
   }
+  img {
+    width: 100%;
+    /* height: 100px; */
+  }
 `;
 
 export default UserDetailsWrapper;

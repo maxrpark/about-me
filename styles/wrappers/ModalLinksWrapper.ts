@@ -12,16 +12,17 @@ const ModalLinksWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(33, 33, 33, 0.8);
+  z-index: 1;
 
   .modal {
     /* max-width: 500px; */
-    height: 375px;
+    min-height: 375px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 16px 16px;
+    padding: 16px 16px;
     width: 90%;
     background: var(--color-white-1);
     box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.25); /*todo  variable*/

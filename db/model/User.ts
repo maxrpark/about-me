@@ -29,7 +29,8 @@ const UserSchema = new Schema<UserSchemaInt>({
   },
   image: {
     type: String,
-    default: "/user-icon.jpg",
+    default:
+      "https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_960_720.png",
   },
 });
 
