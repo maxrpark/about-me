@@ -6,7 +6,7 @@ import { db } from "../db/connectDB";
 import User from "../db/model/User";
 import axios from "axios";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import { LoginWrapper } from "../styles/wrappers";
 
 const useDetails = {
   name: "",
@@ -59,7 +59,7 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
     }
   };
   return (
-    <Wrapper>
+    <LoginWrapper>
       <h2 className='title'>About me</h2>
       <form>
         <label htmlFor='name'>Name</label>
@@ -75,36 +75,9 @@ const LoginPage: NextPage<Props> = ({ isAlreadyRegister }) => {
           {isAlreadyRegister ? "login" : "register"}
         </button>
       </form>
-    </Wrapper>
+    </LoginWrapper>
   );
 };
-
-const Wrapper = styled.main`
-  display: grid;
-  place-content: center;
-  grid-template-columns: 1fr;
-  /* max-width: 300px; */
-  .title {
-    text-align: center;
-    font-weight: 400;
-    font-size: 66px;
-  }
-
-  .btn {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 1.2rem;
-    height: 50px;
-    background: #e3f2fd;
-    border: none;
-    font-weight: 600;
-    font-size: 29px;
-    line-height: 35px;
-  }
-`;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const res = await getSession(ctx);

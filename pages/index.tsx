@@ -37,7 +37,6 @@ const Home: NextPage<Props> = ({ links, social, themesData, user }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let { user, links, social, themesData } = await getData();
-  console.log(user);
 
   return {
     props: {

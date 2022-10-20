@@ -32,12 +32,8 @@ const updateLink: NextApiHandler = async (req, res) => {
     res.status(400).json(error);
   }
 };
-const deleteLink: NextApiHandler = async (req, res) => {
-  // const { url, name } = req.body;
-  // if (!url || !name) {
-  //   return res.status(400).json("Please provide all values");
-  // }
 
+const deleteLink: NextApiHandler = async (req, res) => {
   try {
     await db.connect();
     await UserLink.findOneAndDelete({ _id: req.query.id });

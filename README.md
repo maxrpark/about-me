@@ -24,22 +24,33 @@ Icons are located in the component/icons folders. They are SVG icons coming from
   - [x] Set user Admin
   - [x] Create endpoint to read and write data to json
     - [x] Links
-    - [ ] Themes
+    - [x] Themes
 - [-] Styles
   - [x] styled Components
-  - [ ] Create wrappers
+  - [x] Create wrappers
     - [x] Links
+    - [x] Login
+    - [x] ModalLinks
+    - [x] Navbar
+    - [x] Sidebar
+    - [x] UserDetails
   - [x] Create Themes
     - [x] Default
     - [x] Dark
     - [x] Pink
     - [x] Light
-  - [ ] Create layouts
+  - [x] Create layouts
     - [x] default
     - [x] minimalist
-    - [ ] styled
 - [-] Create theme or style context
   - [x]
 - [x] Create Global Context
   - [x] links
   - [x] social
+- [ ] Create toast component
+  - [ ] Login
+  - [ ] admin messages
+- [x] Update User
+  - [ ] name
+  - [ ] password
+  - [ ] img
